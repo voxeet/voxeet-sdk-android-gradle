@@ -1,0 +1,25 @@
+configurations {
+    ktlint
+}
+dependencies {
+    ktlint dolbyio.ktlint
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    mainClass = "com.pinterest.ktlint.Main"
+    inputs.files(fileTree("src").matching {
+        include "**/*.kt"
+        exclude "test/**/*.kt", "androidTest/**/*.kt"
+    })
+    outputs.file("build/reports/ktlint-report.xml")
+    outputs.cacheIf { true }
+
+    args "src/**/*.kt", "!src/test/**/*.kt", "!src/androidTest/**/*.kt",
+        "--editorconfig=${rootDir}/gradle/ktlint-editorconfig",
+        "--reporter=checkstyle,output=build/reports/ktlint-report.xml",
+        "--reporter=plain"
+
+    maxHeapSize = "256m"
+}

@@ -1,0 +1,57 @@
+apply plugin: 'jacoco'
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ["testDebugUnitTest"/*, "createDebugCoverageReport"*/]) {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports"
+
+    tasks.withType(VerificationTask.class).configureEach {
+        if (it.name.matches(/connected.+AndroidTest/) || it.name.matches(/test.*UnitTest/)) {
+            it.ignoreFailures = true
+        }
+    }
+
+    reports {
+        csv.required = false
+        xml.required = true
+        html.required = true
+    }
+
+    def jacocoExcludes = [
+        '**/R.class',
+        '**/R$*.class',
+        '**/BuildConfig.*',
+        '**/Manifest*.*',
+        'android/**/*.*',
+        '**/Lambda$*.class',
+        '**/Lambda.class',
+        '**/*Lambda.class',
+        '**/*Lambda*.class',
+        '**/*Lambda*.*',
+        '**/*Builder.*',
+        '**/*_MembersInjector.class',
+        '**/*_MembersInjector*.*',
+        '**/*_*Factory*.*',
+        '**/*Component*.*',
+        '**/*Module*.*'
+    ]
+
+    final mainSrc = "${project.projectDir}/src/main/java"
+
+    final androidModuleKotlinFileTree = fileTree(dir: "${project.buildDir}/tmp/kotlin-classes/debug", excludes: jacocoExcludes)
+    final androidModuleJavacFileTree = fileTree(dir: "${project.buildDir}/intermediates/javac/debug", excludes: jacocoExcludes)
+    final javaModuleKotlinFileTree = fileTree(dir: "${project.buildDir}/classes/kotlin/main", excludes: jacocoExcludes)
+    final javaModuleJavacFileTree = fileTree(dir: "${project.buildDir}/classes/java/main", excludes: jacocoExcludes)
+
+    sourceDirectories.setFrom files([mainSrc])
+    classDirectories.setFrom files([
+        androidModuleKotlinFileTree,
+        androidModuleJavacFileTree,
+        javaModuleKotlinFileTree,
+        javaModuleJavacFileTree
+    ])
+
+    executionData.setFrom files(fileTree(dir: project.buildDir, includes: [
+        "**/*.exec",
+        "**/*.ec"
+    ]))
+}

@@ -1,0 +1,19 @@
+apply plugin: "com.github.ben-manes.versions"
+apply plugin: "nl.littlerobots.version-catalog-update"
+
+versionCatalogUpdate {
+    sortByKey = false
+}
+
+dependencyUpdates.resolutionStrategy {
+    componentSelection { rules ->
+        rules.all { ComponentSelection selection ->
+            boolean rejected = ["SNAPSHOT", "dev", "preview", "alpha", "beta", "rc"].any { qualifier ->
+                selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-]*/
+            }
+            if (rejected) {
+                selection.reject("Reject early release")
+            }
+        }
+    }
+}

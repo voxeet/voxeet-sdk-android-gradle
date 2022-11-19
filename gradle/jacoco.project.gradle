@@ -1,0 +1,24 @@
+apply plugin: "jacoco"
+
+gradle.projectsEvaluated {
+    rootProject.tasks.create("jacocoProjectReport", JacocoReport) {
+        group = "Reporting"
+        description = "Jacoco test coverage reports for whole project."
+
+        reports {
+            csv.required = false
+            xml.required = true
+            html.required = true
+        }
+
+        def modules = rootProject.subprojects.findAll {
+            isSourcesModule(it) &&  it.hasProperty("jacocoTestReport")
+        }
+
+        dependsOn(modules.jacocoTestReport)
+
+        sourceDirectories.setFrom files(modules.jacocoTestReport.sourceDirectories)
+        classDirectories.setFrom files(modules.jacocoTestReport.classDirectories)
+        executionData.setFrom files(modules.jacocoTestReport.executionData)
+    }
+}

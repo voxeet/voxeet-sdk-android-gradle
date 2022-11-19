@@ -1,0 +1,145 @@
+afterEvaluate { project ->
+    def isAndroid = project.plugins.hasPlugin("com.android.library") ||
+        project.plugins.hasPlugin("com.android.dynamic-feature") ||
+        project.plugins.hasPlugin("com.android.application")
+
+    def isAndroidComponent = project.plugins.hasPlugin("com.android.library") ||
+        project.plugins.hasPlugin("com.android.dynamic-feature")
+
+    def isJava = project.plugins.hasPlugin("java-library") ||
+        project.plugins.hasPlugin("java")
+
+    if (isAndroid || isJava) {
+        setupModule(isAndroid, isAndroidComponent)
+        setupCommonTasks(isAndroid)
+        setupKapt(project)
+    }
+}
+
+def setupModule(isAndroid, isAndroidComponent) {
+    if (isAndroid) {
+        android {
+            compileSdkVersion projectCompileSdk
+
+            defaultConfig {
+                minSdkVersion projectMinSdk
+                targetSdkVersion projectTargetSdk
+
+                testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+                if (isAndroidComponent) {
+                    consumerProguardFiles "consumer-rules.pro"
+                }
+            }
+
+            buildTypes {
+                debug.testCoverageEnabled true
+                if (isAndroidComponent) {
+                    release.minifyEnabled false
+                }
+            }
+
+            compileOptions {
+                coreLibraryDesugaringEnabled true
+                sourceCompatibility JavaVersion.VERSION_11
+                targetCompatibility JavaVersion.VERSION_11
+            }
+
+            kotlinOptions {
+                jvmTarget = "11"
+                freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+            }
+
+            kotlin {
+                sourceSets {
+                    debug {
+                        kotlin.srcDir("build/generated/ksp/debug/kotlin")
+                    }
+                    release {
+                        kotlin.srcDir("build/generated/ksp/release/kotlin")
+                    }
+                }
+            }
+
+            lintOptions {
+                abortOnError true
+                checkDependencies true
+                checkReleaseBuilds false
+                checkAllWarnings false
+                ignoreTestSources true
+                warningsAsErrors true
+                disable = [
+                    "GoogleAppIndexingWarning",
+                    "GradleDependency",
+                    "JavaPluginLanguageLevel",
+                    "LockedOrientationActivity",
+                    "NewerVersionAvailable",
+                    "UnusedIds"
+                ]
+            }
+
+            dependencies {
+                coreLibraryDesugaring dolbyio.desugarJdkLibs
+            }
+
+            testOptions {
+                unitTests.returnDefaultValues = true
+                unitTests.all {
+                    useJUnitPlatform()
+                    maxParallelForks = Runtime.runtime.availableProcessors() - 1
+                }
+            }
+        }
+
+        dependencies {
+            androidTestImplementation dolbyio.androidx.test.rules
+            androidTestImplementation dolbyio.androidx.test.runner
+            androidTestImplementation dolbyio.androidx.test.ext.junit
+            androidTestImplementation dolbyio.androidx.espresso.core
+            androidTestImplementation dolbyio.kotlinx.coroutines.test
+            androidTestImplementation dolbyio.mockito.android
+            androidTestImplementation dolbyio.androidx.test.core.ktx
+
+            testImplementation dolbyio.androidx.test.ext.junit
+            testImplementation dolbyio.junit.jupiter.api
+            testRuntimeOnly dolbyio.junit.jupiter.engine
+            testImplementation dolbyio.junit.jupiter.params
+            testRuntimeOnly dolbyio.junit.vintage.engine
+        }
+    } else {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+
+        compileKotlin.kotlinOptions.jvmTarget = "11"
+        compileTestKotlin.kotlinOptions.jvmTarget = "11"
+
+        compileKotlin.kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+        compileTestKotlin.kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+
+        test {
+            maxParallelForks = Runtime.runtime.availableProcessors() - 1
+            maxHeapSize = "256m"
+        }
+    }
+}
+
+def setupCommonTasks(isAndroid) {
+    if (isAndroid) {
+        tasks.register("unitTest") { task ->
+            task.dependsOn('testDebugUnitTest')
+        }
+    } else {
+        tasks.register("unitTest") { task ->
+            task.dependsOn('test')
+        }
+    }
+}
+
+// https://www.zacsweers.dev/kapts-hidden-test-costs/
+def setupKapt(project) {
+    if (project.name != "sample" || project.name != "app") {
+        tasks
+            .matching { it.name.startsWith("kapt") && it.name.endsWith("TestKotlin") }
+            .configureEach { it.enabled = false }
+    }
+}

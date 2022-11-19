@@ -1,0 +1,25 @@
+configurations {
+    detekt
+}
+dependencies {
+    detekt dolbyio.detekt
+}
+
+task detekt(type: JavaExec, group: "verification") {
+    description = "Code smell analysis for Kotlin."
+    classpath = configurations.detekt
+    mainClass = "io.gitlab.arturbosch.detekt.cli.Main"
+    inputs.files(fileTree("src").matching {
+        include "**/*.kt"
+        exclude "test/**/*.kt", "androidTest/**/*.kt"
+    })
+    outputs.file("build/reports/detekt-report.xml")
+    outputs.cacheIf { true }
+
+    args "--input", "src",
+        "--excludes", "src/test/**,src/androidTest/**",
+        "--config", "$rootDir/gradle/detekt-config.yml",
+        "--report", "xml:build/reports/detekt-report.xml,html:build/reports/detekt-report.html"
+
+    maxHeapSize = "256m"
+}

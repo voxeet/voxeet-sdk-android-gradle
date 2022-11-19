@@ -1,0 +1,78 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier "sources"
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                // hack derivated 'from components.release', since we have flavors in the app,
+                // we need to explicitly get the projet's components
+                from project(":${project.name}").components.release
+
+                artifactId = "${project.name}"
+                groupId = rootProject.ext.groupId
+                version = rootProject.ext.voxeetSdkVersion
+
+                pom {
+                    name = "${project.name}"
+                    description = "Dolby.io Communications APIs library module"
+                    inceptionYear = "${new Date().format("YYYY")}"
+                    url = "https://github.com/voxeet/voxeet-sdk-android"
+                    licenses {
+                        license {
+                            name = "Dolby Software License Agreement"
+                            url = "https://github.com/voxeet/voxeet-sdk-android/blob/main/LICENSE"
+                        }
+                    }
+                }
+            }
+        }
+        repositories {
+            mavenLocal()
+
+            if (null != System.env.CODEARTIFACT_DOMAIN) {
+                // if new repositories needs to be added, it can be done below
+                // and if for those repositories, conditions need to be applied, it can be done using if statements
+                maven {
+                  url "https://${System.env.CODEARTIFACT_DOMAIN}-${System.env.CODEARTIFACT_DOMAIN_OWNER_ID}.d.codeartifact.${System.env.CODEARTIFACT_REGION}.amazonaws.com/maven/${System.env.CODEARTIFACT_REPO}/"
+                  credentials {
+                    username "${System.env.CODEARTIFACT_AUTH_USERNAME}"
+                    password "${System.env.CODEARTIFACT_AUTH_TOKEN}"
+                  }
+                  metadataSources {
+                    mavenPom()
+                    artifact()
+                  }
+                }
+            }
+            if (null != System.env.JFA_MVN_REGISTRY_URL) {
+                maven {
+                    url "${System.env.JFA_MVN_REGISTRY_URL}"
+                    credentials {
+                        username "${System.env.JFA_SA_USERNAME}"
+                        password "${System.env.JFA_SA_PASSWD}"
+                    }
+                    metadataSources {
+                        mavenPom()
+                        artifact()
+                    }
+                }
+            }
+        }
+    }
+
+    signing {
+        setRequired {
+            gradle.taskGraph.allTasks.any { it instanceof PublishToMavenRepository }
+        }
+        sign publishing.publications.release
+    }
+}
