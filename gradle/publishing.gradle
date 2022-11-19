@@ -19,7 +19,7 @@ afterEvaluate {
 
                 artifactId = "${project.name}"
                 groupId = rootProject.ext.groupId
-                version = rootProject.ext.voxeetSdkVersion
+                version = rootProject.ext.version
 
                 pom {
                     name = "${project.name}"

@@ -1,0 +1,19 @@
+//in order to change the origin of the diolbyio.gradle, invoke gradlew with -PDOLBYIO_GRADLE=path
+def random = new Random()
+def dolbyioGradle = "https://raw.githubusercontent.com/voxeet/voxeet-sdk-android-gradle/main/dolbyio.gradle?rand=${random.nextInt()}"
+
+if (settings.ext.find("DOLBYIO_GRADLE")) {
+    dolbyioGradle = DOLBYIO_GRADLE
+}
+
+apply from: dolbyioGradle
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        dolbyio {
+            from(files(gradle.dolbyio.files.catalog))
+        }
+    }
+}
+
+include ":library"

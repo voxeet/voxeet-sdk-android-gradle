@@ -1,0 +1,55 @@
+def version = 'main'
+
+def files = [
+  "dependencyUpdates",
+  "detekt",
+  "dokka",
+  "jacoco",
+  "ktlint",
+  "license",
+  "modules",
+  "moduleSetup",
+  "publishing",
+  "sonarqube",
+  "tasks",
+  "versions"
+].collectEntries{[it, "${it}.gradle"]}
+
+def holder = [
+    catalog: 'libs.versions.toml',
+    detektConfig: 'detekt-config.yml',
+    ktlintConfig: 'ktlint-editorconfig',
+    jacocoProject: 'jacoco.project.gradle'
+]
+
+holder.each {
+  files[it.key] = it.value
+}
+
+def output = "${rootDir}/gradle/dolbyio/${version}"
+def outputDir = new File(output)
+
+if (!outputDir.exists()) outputDir.mkdirs()
+
+def random = new Random()
+
+files.each {
+  def url = "https://raw.githubusercontent.com/voxeet/voxeet-sdk-android-gradle/${version}/gradle/${it.value}?timestamp=${random.nextInt()}"
+  def result = "${output}/${it.value}"
+  def file = new File(result)
+
+  if (!file.exists()) {
+      new URL(url).withInputStream{ i -> file.withOutputStream{ it << i }}
+  }
+
+  it.value = result
+}
+
+// load the values into gradle.loadedVersions
+apply from: files.versions
+
+gradle.ext.dolbyio = [
+  files: files,
+  versions: gradle.loadedVersions
+]
+
