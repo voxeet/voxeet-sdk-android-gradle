@@ -20,7 +20,7 @@ jobs:
         id: build
         run: |
           cd sample
-          ./gradlew -DOLBYIO_GRADLE="../dolbyio.gradle" :library:assembleDebug
+          ./gradlew -DOLBYIO_GRADLE="../dolbyio.gradle" -DOLBYIO_GRADLE_VERSION_USED="$GITHUB_SHA" :library:assembleRelease publishToMavenLocal
 
   build_as_remote:
     runs-on: ubuntu-latest
@@ -36,4 +36,4 @@ jobs:
         id: build
         run: |
           cd sample
-          ./gradlew :library:assembleDebug
+          ./gradlew -DOLBYIO_GRADLE_VERSION_USED="$GITHUB_SHA" :library:assembleDebug publishToMavenLocal

@@ -1,5 +1,9 @@
 def version = 'main'
 
+if (settings.ext.find("DOLBYIO_GRADLE_VERSION_USED")) {
+    version = DOLBYIO_GRADLE_VERSION_USED
+}
+
 def files = [
   "dependencyUpdates",
   "detekt",
