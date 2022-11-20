@@ -61,7 +61,7 @@ subprojects {
             suppressObviousFunctions.set(true)
             // A set of visibility modifiers that should be documented
             documentedVisibilities.set([
-                org.jetbrains.dokka.DokkaConfiguration.Visibility.PUBLIC
+                    org.jetbrains.dokka.DokkaConfiguration.Visibility.PUBLIC
             ].toSet())
             // Emit warnings about not documented members. Applies globally, also can be overridden by packageOptions
             reportUndocumented.set(false)

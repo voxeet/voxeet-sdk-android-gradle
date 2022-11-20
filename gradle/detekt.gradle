@@ -17,9 +17,9 @@ task detekt(type: JavaExec, group: "verification") {
     outputs.cacheIf { true }
 
     args "--input", "src",
-        "--excludes", "src/test/**,src/androidTest/**",
-        "--config", "$rootDir/gradle/detekt-config.yml",
-        "--report", "xml:build/reports/detekt-report.xml,html:build/reports/detekt-report.html"
+            "--excludes", "src/test/**,src/androidTest/**",
+            "--config", gradle.dolbyio.files.detektConfig,
+            "--report", "xml:build/reports/detekt-report.xml,html:build/reports/detekt-report.html"
 
     maxHeapSize = "256m"
 }

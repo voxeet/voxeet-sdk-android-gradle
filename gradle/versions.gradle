@@ -1,5 +1,5 @@
 gradle.ext.loadedVersions = [
-  minSdkVersion: 21,
-  targetSdkVersion: 33,
-  compileSdkVersion: 33
+        minSdkVersion    : 21,
+        targetSdkVersion : 33,
+        compileSdkVersion: 33
 ]

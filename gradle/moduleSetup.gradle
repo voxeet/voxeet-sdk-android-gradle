@@ -1,13 +1,13 @@
 afterEvaluate { project ->
     def isAndroid = project.plugins.hasPlugin("com.android.library") ||
-        project.plugins.hasPlugin("com.android.dynamic-feature") ||
-        project.plugins.hasPlugin("com.android.application")
+            project.plugins.hasPlugin("com.android.dynamic-feature") ||
+            project.plugins.hasPlugin("com.android.application")
 
     def isAndroidComponent = project.plugins.hasPlugin("com.android.library") ||
-        project.plugins.hasPlugin("com.android.dynamic-feature")
+            project.plugins.hasPlugin("com.android.dynamic-feature")
 
     def isJava = project.plugins.hasPlugin("java-library") ||
-        project.plugins.hasPlugin("java")
+            project.plugins.hasPlugin("java")
 
     if (isAndroid || isJava) {
         setupModule(isAndroid, isAndroidComponent)
@@ -69,12 +69,12 @@ def setupModule(isAndroid, isAndroidComponent) {
                 ignoreTestSources true
                 warningsAsErrors true
                 disable = [
-                    "GoogleAppIndexingWarning",
-                    "GradleDependency",
-                    "JavaPluginLanguageLevel",
-                    "LockedOrientationActivity",
-                    "NewerVersionAvailable",
-                    "UnusedIds"
+                        "GoogleAppIndexingWarning",
+                        "GradleDependency",
+                        "JavaPluginLanguageLevel",
+                        "LockedOrientationActivity",
+                        "NewerVersionAvailable",
+                        "UnusedIds"
                 ]
             }
 
@@ -139,7 +139,7 @@ def setupCommonTasks(isAndroid) {
 def setupKapt(project) {
     if (project.name != "sample" || project.name != "app") {
         tasks
-            .matching { it.name.startsWith("kapt") && it.name.endsWith("TestKotlin") }
-            .configureEach { it.enabled = false }
+                .matching { it.name.startsWith("kapt") && it.name.endsWith("TestKotlin") }
+                .configureEach { it.enabled = false }
     }
 }

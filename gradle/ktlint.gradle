@@ -17,9 +17,9 @@ task ktlint(type: JavaExec, group: "verification") {
     outputs.cacheIf { true }
 
     args "src/**/*.kt", "!src/test/**/*.kt", "!src/androidTest/**/*.kt",
-        "--editorconfig=${rootDir}/gradle/ktlint-editorconfig",
-        "--reporter=checkstyle,output=build/reports/ktlint-report.xml",
-        "--reporter=plain"
+            "--editorconfig=${gradle.dolbyio.files.ktlintConfig}",
+            "--reporter=checkstyle,output=build/reports/ktlint-report.xml",
+            "--reporter=plain"
 
     maxHeapSize = "256m"
 }

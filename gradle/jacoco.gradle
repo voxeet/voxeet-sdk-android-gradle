@@ -17,22 +17,22 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ["testDebugUnitTest"/*, "cr
     }
 
     def jacocoExcludes = [
-        '**/R.class',
-        '**/R$*.class',
-        '**/BuildConfig.*',
-        '**/Manifest*.*',
-        'android/**/*.*',
-        '**/Lambda$*.class',
-        '**/Lambda.class',
-        '**/*Lambda.class',
-        '**/*Lambda*.class',
-        '**/*Lambda*.*',
-        '**/*Builder.*',
-        '**/*_MembersInjector.class',
-        '**/*_MembersInjector*.*',
-        '**/*_*Factory*.*',
-        '**/*Component*.*',
-        '**/*Module*.*'
+            '**/R.class',
+            '**/R$*.class',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            'android/**/*.*',
+            '**/Lambda$*.class',
+            '**/Lambda.class',
+            '**/*Lambda.class',
+            '**/*Lambda*.class',
+            '**/*Lambda*.*',
+            '**/*Builder.*',
+            '**/*_MembersInjector.class',
+            '**/*_MembersInjector*.*',
+            '**/*_*Factory*.*',
+            '**/*Component*.*',
+            '**/*Module*.*'
     ]
 
     final mainSrc = "${project.projectDir}/src/main/java"
@@ -44,14 +44,14 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ["testDebugUnitTest"/*, "cr
 
     sourceDirectories.setFrom files([mainSrc])
     classDirectories.setFrom files([
-        androidModuleKotlinFileTree,
-        androidModuleJavacFileTree,
-        javaModuleKotlinFileTree,
-        javaModuleJavacFileTree
+            androidModuleKotlinFileTree,
+            androidModuleJavacFileTree,
+            javaModuleKotlinFileTree,
+            javaModuleJavacFileTree
     ])
 
     executionData.setFrom files(fileTree(dir: project.buildDir, includes: [
-        "**/*.exec",
-        "**/*.ec"
+            "**/*.exec",
+            "**/*.ec"
     ]))
 }

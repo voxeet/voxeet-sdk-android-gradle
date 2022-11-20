@@ -12,7 +12,7 @@ gradle.projectsEvaluated {
         }
 
         def modules = rootProject.subprojects.findAll {
-            isSourcesModule(it) &&  it.hasProperty("jacocoTestReport")
+            isSourcesModule(it) && it.hasProperty("jacocoTestReport")
         }
 
         dependsOn(modules.jacocoTestReport)

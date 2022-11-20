@@ -42,15 +42,15 @@ afterEvaluate {
                 // if new repositories needs to be added, it can be done below
                 // and if for those repositories, conditions need to be applied, it can be done using if statements
                 maven {
-                  url "https://${System.env.CODEARTIFACT_DOMAIN}-${System.env.CODEARTIFACT_DOMAIN_OWNER_ID}.d.codeartifact.${System.env.CODEARTIFACT_REGION}.amazonaws.com/maven/${System.env.CODEARTIFACT_REPO}/"
-                  credentials {
-                    username "${System.env.CODEARTIFACT_AUTH_USERNAME}"
-                    password "${System.env.CODEARTIFACT_AUTH_TOKEN}"
-                  }
-                  metadataSources {
-                    mavenPom()
-                    artifact()
-                  }
+                    url "https://${System.env.CODEARTIFACT_DOMAIN}-${System.env.CODEARTIFACT_DOMAIN_OWNER_ID}.d.codeartifact.${System.env.CODEARTIFACT_REGION}.amazonaws.com/maven/${System.env.CODEARTIFACT_REPO}/"
+                    credentials {
+                        username "${System.env.CODEARTIFACT_AUTH_USERNAME}"
+                        password "${System.env.CODEARTIFACT_AUTH_TOKEN}"
+                    }
+                    metadataSources {
+                        mavenPom()
+                        artifact()
+                    }
                 }
             }
             if (null != System.env.JFA_MVN_REGISTRY_URL) {
