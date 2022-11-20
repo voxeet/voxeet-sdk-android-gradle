@@ -10,9 +10,12 @@ Open Source configurations used on Android projects
 ## Install
 
 In your root's settings.gradle, copy paste the following at the top :
+Note : change the version to the specific tag, sha or branch you want to use
 
 ```groovy
-apply from: "https://raw.githubusercontent.com/voxeet/voxeet-sdk-android-gradle/main/dolbyio.gradle"
+def version = 'main'
+
+apply from: "https://raw.githubusercontent.com/voxeet/voxeet-sdk-android-gradle/${version}/dolbyio.gradle"
 
 dependencyResolutionManagement {
     versionCatalogs {
