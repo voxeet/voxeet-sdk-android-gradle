@@ -1,3 +1,6 @@
+# Gradle & idea
 .gradle/
 **/gradle/dolbyio/
 build/
+.idea/
+local.properties

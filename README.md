@@ -56,19 +56,24 @@ In order for our projects to share most of the configuration like publishing, ma
 
 Where SomeName can be one of the following :
 
-- **dependencyUpdates** used to prevent non releases from our dependencies
-- **detekt** apply detekt rules (submodule)
-- **dokka** apply dokka rules (submodule)
-- **jacoco** apply jacoco rules (submodule)
-- **jacocoProject** apply jacoco main rules (rootProject)
-- **ktlint** apply ktlint rules (submodule)
-- **license** apply licenses generation rules (submodule)
-- **modules** apply overall project configuration (rootProject's buildScript)
-- **moduleSetup** apply module-specific default configuration (submodule's buildScript)
-- **publishing** apply publication configuration (submodule)
-- **sonarqube** apply sonarqube configuration (submodule)
-- **tasks** create tasks related to publications (submodule)
-- **versions** apply some version-related variable like min sdk (rootProject's buildScript)
+In the root project :
+
+- **modules**  *(buildScript)* apply overall project configuration
+- **versions**  *(buildScript)* apply some version-related variable like min sdk
+- **jacocoProject** *(apply from)* apply jacoco main rules (rootProject)
+- **dokka** *(apply from)* apply dokka rules
+- **dependencyUpdates** *(apply from)* used to prevent non releases from our dependencies
+
+For submodules :
+
+- **moduleSetup** *(buildScript)* apply module-specific default configuration (submodule's buildScript)
+- **detekt** *(apply from)* detekt rules (submodule)
+- **ktlint** *(apply from)* apply ktlint rules (submodule)
+- **jacoco** *(apply from)* apply jacoco rules (submodule)
+- **license** *(apply from)* apply licenses generation rules (submodule)
+- **publishing** *(apply from)* apply publication configuration (submodule)
+- **sonarqube** *(apply from)* apply sonarqube configuration (submodule)
+- **tasks** *(apply from)* create tasks related to publications (submodule)
 
 **What to use in the main build.gradle**
 
@@ -126,7 +131,6 @@ apply from: gradle.dolbyio.files.dokka
 //EOF
 ```
 
-
 ## Try sample
 
 inside the sample/ folder, run `./gradlew tasks`, you will notice that the **sample/gradle/dolbyio** folder will populate itself, those are files and configuration files you then can use in your own project
@@ -138,3 +142,7 @@ On top of using the sample, you can also change the default one used, this is fo
 ## TODO
 
 Some project files still need to be changed so that their predefined values can be changed a bit more easily (specifically for non dolby.io project integration)
+
+- **publishing** The script should make the various optionals
+- **sonarqube** make the prefix as a variable from rootProject as well
+
