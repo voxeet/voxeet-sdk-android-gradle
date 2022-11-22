@@ -15,8 +15,7 @@ def files = [
   "moduleSetup",
   "publishing",
   "sonarqube",
-  "tasks",
-  "versions"
+  "tasks"
 ].collectEntries{[it, "${it}.gradle"]}
 
 def holder = [
@@ -49,11 +48,7 @@ files.each {
   it.value = result
 }
 
-// load the values into gradle.loadedVersions
-apply from: files.versions
-
 gradle.ext.dolbyio = [
-  files: files,
-  versions: gradle.loadedVersions
+  files: files
 ]
 

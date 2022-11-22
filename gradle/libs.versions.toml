@@ -7,6 +7,10 @@ licenseGradlePlugin = "0.9.0"
 gradleVersionsPlugin = "0.43.0"
 versionCatalogUpdatePlugin = "0.7.0"
 mkdocsGradlePlugin = "3.0.0"
+# Expected Android SDK
+minSdkVersion = "21"
+targetSdkVersion = "33"
+compileSdkVersion = "33"
 # Dokka
 dokka = "1.7.20"
 dokka-supress-undocumented = "1.1"

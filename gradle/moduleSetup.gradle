@@ -19,11 +19,11 @@ afterEvaluate { project ->
 def setupModule(isAndroid, isAndroidComponent) {
     if (isAndroid) {
         android {
-            compileSdkVersion gradle.dolbyio.versions.compileSdkVersion
+            compileSdkVersion Integer.parseInt(dolbyio.versions.compileSdkVersion.get())
 
             defaultConfig {
-                minSdkVersion gradle.dolbyio.versions.minSdkVersion
-                targetSdkVersion gradle.dolbyio.versions.targetSdkVersion
+                minSdkVersion dolbyio.versions.minSdkVersion.get()
+                targetSdkVersion Integer.parseInt(dolbyio.versions.targetSdkVersion.get())
 
                 testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
