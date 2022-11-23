@@ -192,7 +192,7 @@ toolbar-compose = { module = "me.onebone:toolbar-compose", version.ref = "toolba
 voxeet-uxkit-systemService = { module = "com.voxeet.sdk:uxkit-system-service", version.ref = "voxeet-uxkit" }
 voxeet-uxkit-exoplayer = { module = "com.voxeet.sdk:uxkit-exoplayer-support", version.ref = "voxeet-uxkit" }
 voxeet-uxkit-youtube = { module = "com.voxeet.sdk:uxkit-youtube", version.ref = "voxeet-uxkit" }
-voxeet-promise = { module = "com.voxeet.sdk:promise", version.ref = "voxeet-promise" }
+voxeet-promise = { module = "io.dolby:promise", version.ref = "voxeet-promise" }
 voxeet-audio = { module = "com.voxeet.sdk:audio", version.ref = "voxeet-audio" }
 # Facebook
 facebook-soloader = { module = "com.facebook.soloader:soloader", version.ref = "facebook-soloader" }
