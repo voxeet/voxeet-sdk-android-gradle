@@ -1,6 +1,9 @@
 apply plugin: 'jacoco'
 
-task jacocoTestReport(type: JacocoReport, dependsOn: ["testDebugUnitTest"/*, "createDebugCoverageReport"*/]) {
+def connectedDevices = (rootProject.properties['CONNECTED_DEVICES'] ?: "0").trim() as Integer
+def dependsOn = connectedDevices > 0 ? [ "testDebugUnitTest", "createDebugCoverageReport" ] : [ "testDebugUnitTest" ]
+
+task jacocoTestReport(type: JacocoReport, dependsOn: dependsOn) {
     group = "Reporting"
     description = "Generate Jacoco coverage reports"
 
