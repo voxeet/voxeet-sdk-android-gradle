@@ -23,14 +23,29 @@ afterEvaluate {
 
                 pom {
                     name = "${project.name}"
-                    description = "Dolby.io Communications APIs library module"
-                    inceptionYear = "${new Date().format("YYYY")}"
-                    url = "https://github.com/voxeet/voxeet-sdk-android"
+                    description = rootProject.ext.pom.description
+                    inceptionYear = rootProject.ext.pom.inceptionYear
+                    url = rootProject.ext.pom.url
+
                     licenses {
                         license {
-                            name = "Dolby Software License Agreement"
-                            url = "https://github.com/voxeet/voxeet-sdk-android/blob/main/LICENSE"
+                            name = rootProject.ext.pom.license.name
+                            url = rootProject.ext.pom.license.url
                         }
+                    }
+
+                    developers {
+                        developer {
+                            id = rootProject.ext.pom.developer.id
+                            name = rootProject.ext.pom.developer.name
+                            email = rootProject.ext.pom.developer.email
+                        }
+                    }
+
+                    scm {
+                        connection = rootProject.ext.pom.scm.connection
+                        developerConnection = rootProject.ext.pom.scm.developerConnection
+                        url = rootProject.ext.pom.scm.url
                     }
                 }
             }

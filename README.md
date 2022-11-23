@@ -142,6 +142,37 @@ inside the sample/ folder, run `./gradlew tasks`, you will notice that the **sam
 
 On top of using the sample, you can also change the default one used, this is for instance used internally here to test that local & remote configuration is working (see our github actions for more)
 
+## Configuration
+
+### Publishing
+
+Mandatory rootProject ext variables, for instance here are some values for one of our library:
+
+```
+ext {
+  ...
+  pom = [
+    description: "Dolby.io Communications APIs library module",
+    inceptionYear: "${new Date().format("YYYY")}",
+    url: "https://github.com/voxeet/sdk-android-lib-promise",
+    license: [
+      name: 'Apache License',
+      url: 'https://github.com/voxeet/sdk-android-lib-promise/blob/main/LICENSE'
+    ],
+    developer: [
+      id: 'dolbyio',
+      name: 'Dolby.io',
+      email: 'support@dolby.io'
+    ],
+    scm: [
+      connection: 'scm:git:github.com/voxeet/sdk-android-lib-promise.git',
+      developerConnection: 'scm:git:ssh://github.com/voxeet/sdk-android-lib-promise.git',
+      url: 'https://github.com/voxeet/sdk-android-lib-promise/tree/main'
+    ]
+  ]
+}
+```
+
 ## TODO
 
 Some project files still need to be changed so that their predefined values can be changed a bit more easily (specifically for non dolby.io project integration)
