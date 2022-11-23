@@ -69,7 +69,7 @@ toolbar-compose = "2.3.5"
 # Voxeet
 voxeet-uxkit = "3.7.0"
 voxeet-promise = "2.7.2"
-voxeet-audio = "2.5.1"
+voxeet-audio = "2.5.2"
 # Dependency injection
 hilt = "2.44"
 # Facebook
@@ -193,7 +193,7 @@ voxeet-uxkit-systemService = { module = "com.voxeet.sdk:uxkit-system-service", v
 voxeet-uxkit-exoplayer = { module = "com.voxeet.sdk:uxkit-exoplayer-support", version.ref = "voxeet-uxkit" }
 voxeet-uxkit-youtube = { module = "com.voxeet.sdk:uxkit-youtube", version.ref = "voxeet-uxkit" }
 voxeet-promise = { module = "io.dolby:promise", version.ref = "voxeet-promise" }
-voxeet-audio = { module = "com.voxeet.sdk:audio", version.ref = "voxeet-audio" }
+voxeet-audio = { module = "io.dolby:audio", version.ref = "voxeet-audio" }
 # Facebook
 facebook-soloader = { module = "com.facebook.soloader:soloader", version.ref = "facebook-soloader" }
 # Dependency injection
