@@ -68,7 +68,7 @@ destinations-compose = "1.7.22-beta"
 toolbar-compose = "2.3.5"
 # Voxeet
 voxeet-uxkit = "3.7.0"
-voxeet-promise = "2.7.1"
+voxeet-promise = "2.7.2"
 voxeet-audio = "2.5.1"
 # Dependency injection
 hilt = "2.44"
