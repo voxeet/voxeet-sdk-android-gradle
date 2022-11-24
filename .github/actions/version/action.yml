@@ -1,0 +1,19 @@
+name: "Configure"
+description: "Configure the environment for multiple jobs"
+outputs:
+  configuration:
+    description: "gradle configuration version available for non-env related"
+    value: ${{ steps.environment.outputs.configuration }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Configure specific environment information IN COMPOSITE
+      id: environment
+      shell: bash
+      run: |
+        grep "def version = '" dolbyio.gradle | cut -d"'" -f2 | sed "s/[^[:digit:][:alpha:]\.-]//g"
+        export VERSION=$(grep "def version = '" dolbyio.gradle | cut -d"'" -f2 | sed "s/[^[:digit:][:alpha:]\.-]//g")
+        echo "will build $VERSION"
+        echo "configuration=$VERSION" >> $GITHUB_OUTPUT
+        echo "CONFIGURATION=$VERSION" >> $GITHUB_ENV
