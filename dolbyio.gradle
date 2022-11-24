@@ -1,4 +1,4 @@
-def version = 'v0.0.8'
+def version = 'v0.0.9'
 
 if (settings.ext.find("DOLBYIO_GRADLE_VERSION_USED")) {
     version = DOLBYIO_GRADLE_VERSION_USED
@@ -24,7 +24,8 @@ def holder = [
     catalog: 'libs.versions.toml',
     detektConfig: 'detekt-config.yml',
     ktlintConfig: 'ktlint-editorconfig',
-    jacocoProject: 'jacoco.project.gradle'
+    jacocoProject: 'jacoco.project.gradle',
+    dokkaProject: 'dokka.project.gradle'
 ]
 
 holder.each {

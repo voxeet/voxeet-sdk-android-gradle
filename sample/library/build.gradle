@@ -18,8 +18,3 @@ dependencies {
 }
 
 apply from: gradle.dolbyio.files.publishing
-apply from: gradle.dolbyio.files.license
-apply from: gradle.dolbyio.files.sonarqube
-apply from: gradle.dolbyio.files.tasks
-apply from: gradle.dolbyio.files.jacoco
-apply from: gradle.dolbyio.files.dokka

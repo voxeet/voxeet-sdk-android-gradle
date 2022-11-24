@@ -13,7 +13,17 @@ afterEvaluate { project ->
         setupModule(isAndroid, isAndroidComponent)
         setupCommonTasks(isAndroid)
         setupKapt(project)
+        
+        apply from: gradle.dolbyio.files.license
+        apply from: gradle.dolbyio.files.sonarqube
+        apply from: gradle.dolbyio.files.tasks
+        apply from: gradle.dolbyio.files.jacoco
+        apply from: gradle.dolbyio.files.dokka
     }
+
+    apply from: gradle.dolbyio.files.ktlint
+    apply from: gradle.dolbyio.files.detekt
+    apply from: gradle.dolbyio.files.dokkaProject
 }
 
 def setupModule(isAndroid, isAndroidComponent) {

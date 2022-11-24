@@ -70,13 +70,7 @@ In the root project :
 For submodules :
 
 - **moduleSetup** *(buildScript)* apply module-specific default configuration (submodule's buildScript)
-- **detekt** *(apply from)* detekt rules (submodule)
-- **ktlint** *(apply from)* apply ktlint rules (submodule)
-- **jacoco** *(apply from)* apply jacoco rules (submodule)
-- **license** *(apply from)* apply licenses generation rules (submodule)
 - **publishing** *(apply from)* apply publication configuration (submodule)
-- **sonarqube** *(apply from)* apply sonarqube configuration (submodule)
-- **tasks** *(apply from)* create tasks related to publications (submodule)
 
 **What to use in the main build.gradle**
 
@@ -84,7 +78,6 @@ Those are example of what can be included
 
 ```groovy
 buildscript {
-  apply from: gradle.dolbyio.files.versions
   apply from: gradle.dolbyio.files.modules
 }
 
@@ -102,8 +95,6 @@ subprojects {
   ...
   if (isSourcesModule(it)) {
     apply from: gradle.dolbyio.files.moduleSetup
-    apply from: gradle.dolbyio.files.ktlint
-    apply from: gradle.dolbyio.files.detekt
   }
 }
 ...
@@ -124,12 +115,8 @@ dependencies {
     implementation dolbyio.eventbus
 }
 
+// if the project need publication. Note that it will then need to configure pom information
 apply from: gradle.dolbyio.files.publishing
-apply from: gradle.dolbyio.files.license
-apply from: gradle.dolbyio.files.sonarqube
-apply from: gradle.dolbyio.files.tasks
-apply from: gradle.dolbyio.files.jacoco
-apply from: gradle.dolbyio.files.dokka
 
 //EOF
 ```
