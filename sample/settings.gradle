@@ -1,17 +1,17 @@
 //in order to change the version used, change this or override DOLBYIO_GRADLE_VERSION_USED (sha, tag, etc...)
 def version = 'main'
 
+def dolbyioGradle = "../dolbyio.gradle"
+settings.ext.DOLBYIO_USE_LOCAL_FILES = true
+
 if (settings.ext.find("DOLBYIO_GRADLE_VERSION_USED")) {
+    settings.ext.DOLBYIO_USE_LOCAL_FILES = false
     version = DOLBYIO_GRADLE_VERSION_USED
+    def random = new Random()
+    dolbyioGradle = "https://raw.githubusercontent.com/voxeet/voxeet-sdk-android-gradle/${version}/dolbyio.gradle?rand=${random.nextInt()}"
 }
 
-def random = new Random()
-//in order to change the origin of the diolbyio.gradle, invoke gradlew with -PDOLBYIO_GRADLE=path
-def dolbyioGradle = "https://raw.githubusercontent.com/voxeet/voxeet-sdk-android-gradle/${version}/dolbyio.gradle?rand=${random.nextInt()}"
-
-if (settings.ext.find("DOLBYIO_GRADLE")) {
-    dolbyioGradle = DOLBYIO_GRADLE
-}
+println("Will use local files ? ${settings.ext.DOLBYIO_USE_LOCAL_FILES}")
 
 apply from: dolbyioGradle
 

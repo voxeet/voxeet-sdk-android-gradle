@@ -1,7 +1,6 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 
 buildscript {
-    apply from: gradle.dolbyio.files.versions
     apply from: gradle.dolbyio.files.modules
 
     repositories {
@@ -77,6 +76,27 @@ subprojects {
 ext {
     groupId = "io.dolby"
     version = "0.0.0"
+
+
+    pom = [
+        description: "Dolby.io Communications APIs library module",
+        inceptionYear: "${new Date().format("YYYY")}",
+        url: "https://github.com/voxeet/voxeet-sdk-android-gradle",
+        license: [
+            name: 'MIT License',
+            url: 'https://github.com/voxeet/voxeet-sdk-android-gradle/blob/main/LICENSE'
+        ],
+        developer: [
+            id: 'dolbyio',
+            name: 'Dolby.io',
+            email: 'support@dolby.io'
+        ],
+        scm: [
+            connection: 'scm:git:github.com/voxeet/voxeet-sdk-android-gradle.git',
+            developerConnection: 'scm:git:ssh://github.com/voxeet/voxeet-sdk-android-gradle.git',
+            url: 'https://github.com/voxeet/voxeet-sdk-android-gradle/tree/main'
+        ]
+    ]
 }
 
 apply from: gradle.dolbyio.files.jacocoProject

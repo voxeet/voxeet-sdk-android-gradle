@@ -1,8 +1,10 @@
-def version = 'main'
+def version = 'v0.0.7'
 
 if (settings.ext.find("DOLBYIO_GRADLE_VERSION_USED")) {
     version = DOLBYIO_GRADLE_VERSION_USED
 }
+
+def useLocalFiles = settings.ext.find("DOLBYIO_USE_LOCAL_FILES") && settings.ext.DOLBYIO_USE_LOCAL_FILES
 
 def files = [
   "dependencyUpdates",
@@ -32,17 +34,27 @@ holder.each {
 def output = "${rootDir}/gradle/dolbyio/${version}"
 def outputDir = new File(output)
 
-if (!outputDir.exists()) outputDir.mkdirs()
-
 def random = new Random()
+def currentDir = file(buildscript.sourceFile).getParentFile().getAbsolutePath()
+
+if (useLocalFiles) {
+  println("using files located at ${currentDir}/gradle/")
+} else {
+  if (!outputDir.exists()) outputDir.mkdirs()
+}
 
 files.each {
-  def url = "https://raw.githubusercontent.com/voxeet/voxeet-sdk-android-gradle/${version}/gradle/${it.value}?timestamp=${random.nextInt()}"
   def result = "${output}/${it.value}"
-  def file = new File(result)
 
-  if (!file.exists()) {
-      new URL(url).withInputStream{ i -> file.withOutputStream{ it << i }}
+  if (useLocalFiles) {
+    result = "${currentDir}/gradle/${it.value}"
+  } else {
+    def url = "https://raw.githubusercontent.com/voxeet/voxeet-sdk-android-gradle/${version}/gradle/${it.value}?timestamp=${random.nextInt()}"
+    def file = new File(result)
+
+    if (!file.exists()) {
+        new URL(url).withInputStream{ i -> file.withOutputStream{ it << i }}
+    }
   }
 
   it.value = result
