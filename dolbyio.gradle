@@ -35,7 +35,9 @@ def output = "${rootDir}/gradle/dolbyio/${version}"
 def outputDir = new File(output)
 
 def random = new Random()
-def currentDir = file(buildscript.sourceFile).getParentFile().getAbsolutePath()
+def currentDir = null == buildscript.sourceFile ? null : file(buildscript.sourceFile).getParentFile().getAbsolutePath()
+
+if (null == currentDir) useLocalFiles = false
 
 if (useLocalFiles) {
   println("using files located at ${currentDir}/gradle/")
