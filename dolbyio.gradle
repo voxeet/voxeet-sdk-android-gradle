@@ -1,4 +1,4 @@
-def version = 'v0.0.7'
+def version = 'v0.0.8'
 
 if (settings.ext.find("DOLBYIO_GRADLE_VERSION_USED")) {
     version = DOLBYIO_GRADLE_VERSION_USED
