@@ -8,10 +8,11 @@ configurations {
     javadocDeps
 }
 
-dependencies {
-    testImplementation dolbyio.junit
-    androidTestImplementation dolbyio.androidx.espresso.core
+android {
+    namespace 'io.dolby.library'
+}
 
+dependencies {
     implementation dolbyio.androidx.core
     implementation dolbyio.eventbus
     implementation dolbyio.voxeet.promise

@@ -22,6 +22,12 @@ jobs:
           cd sample
           ./gradlew ktlint detekt :library:assembleRelease publishToMavenLocal
 
+      - name: Doc
+        id: doc
+        run: |
+          cd sample
+          ./gradlew :library:dokkaHtml :dokkaGfmCollector
+
   build_as_remote:
     runs-on: ubuntu-latest
 
@@ -37,6 +43,12 @@ jobs:
         run: |
           cd sample
           ./gradlew -PDOLBYIO_GRADLE_VERSION_USED="$GITHUB_SHA" ktlint detekt :library:assembleDebug publishToMavenLocal
+
+      - name: Doc
+        id: doc
+        run: |
+          cd sample
+          ./gradlew -PDOLBYIO_GRADLE_VERSION_USED="$GITHUB_SHA" :library:dokkaHtml :dokkaGfmCollector
 
   release:
     runs-on: ubuntu-latest
