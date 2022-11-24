@@ -133,6 +133,18 @@ On top of using the sample, you can also change the default one used, this is fo
 
 ### Publishing
 
+In your submodule(s)'s build.gradle, use `apply from: gradle.dolbyio.files.publishing`
+
+By default, the sources aren't part of the publication of libraries, however it's possible to have your library upload their sources alongside the artifacts. To do so, register a publishWithSources in the rootProject or project's ext holder :
+
+```
+ext {
+  publishWithSources = true/false
+}
+```
+
+Note : when using the rootProject, if you got various libraries as a submodule, if you publish those, their sources will be attached. In some cases, you would want to use some granularity and use the publishWithSources in either only one or some of your submodules (this only applies to the libraries)
+
 Mandatory rootProject ext variables, for instance here are some values for one of our library:
 
 ```

@@ -4,10 +4,6 @@ plugins {
     alias(dolbyio.plugins.dokka)
 }
 
-configurations {
-    javadocDeps
-}
-
 android {
     namespace 'io.dolby.library'
 }

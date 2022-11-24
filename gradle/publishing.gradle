@@ -2,12 +2,18 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
-task sourceJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier "sources"
-}
-
 afterEvaluate {
+
+    task sourceJar(type: Jar) {
+        from android.sourceSets.main.java.srcDirs
+        classifier "sources"
+    }
+
+    task javadocJar(type: Jar, dependsOn: dokkaHtml) {
+        classifier = 'javadoc'
+        from dokkaHtml.outputDirectory
+    }
+
     publishing {
         publications {
             // Creates a Maven publication called "release".
@@ -20,6 +26,12 @@ afterEvaluate {
                 artifactId = "${project.name}"
                 groupId = rootProject.ext.groupId
                 version = rootProject.ext.version
+
+                artifact javadocJar
+                if ((rootProject.ext.has("publishWithSources") && rootProject.ext.publishWithSources)
+                    || (project.ext.has("publishWithSources") && project.ext.publishWithSources)) {
+                    artifact sourceJar
+                }
 
                 pom {
                     name = "${project.name}"
