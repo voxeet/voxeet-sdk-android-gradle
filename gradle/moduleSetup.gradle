@@ -9,6 +9,9 @@ afterEvaluate { project ->
     def isJava = project.plugins.hasPlugin("java-library") ||
             project.plugins.hasPlugin("java")
 
+    def isLibrary = project.plugins.hasPlugin("java-library") ||
+            project.plugins.hasPlugin("com.android.library")
+
     if (isAndroid || isJava) {
         setupModule(isAndroid, isAndroidComponent)
         setupCommonTasks(isAndroid)
@@ -16,8 +19,11 @@ afterEvaluate { project ->
         
         apply from: gradle.dolbyio.files.license
         apply from: gradle.dolbyio.files.sonarqube
-        apply from: gradle.dolbyio.files.jacoco
         apply from: gradle.dolbyio.files.dokka
+    }
+
+    if (isLibrary) {
+        apply from: gradle.dolbyio.files.jacoco
     }
 
     apply from: gradle.dolbyio.files.ktlint
