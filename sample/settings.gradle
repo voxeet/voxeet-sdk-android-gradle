@@ -2,16 +2,12 @@
 def version = 'main'
 
 def dolbyioGradle = "../dolbyio.gradle"
-settings.ext.DOLBYIO_USE_LOCAL_FILES = true
 
 if (settings.ext.find("DOLBYIO_GRADLE_VERSION_USED")) {
-    settings.ext.DOLBYIO_USE_LOCAL_FILES = false
     version = DOLBYIO_GRADLE_VERSION_USED
     def random = new Random()
     dolbyioGradle = "https://raw.githubusercontent.com/voxeet/voxeet-sdk-android-gradle/${version}/dolbyio.gradle?rand=${random.nextInt()}"
 }
-
-println("Will use local files ? ${settings.ext.DOLBYIO_USE_LOCAL_FILES}")
 
 apply from: dolbyioGradle
 
