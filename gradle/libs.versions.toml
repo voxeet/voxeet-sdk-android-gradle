@@ -2,7 +2,7 @@
 # Gradle plugins
 androidGradlePlugin = "7.3.1"
 gradleNexusPlugin = "2.3.1"
-sonarcubeGradlePlugin = "3.5.0.2730"
+sonarcubeGradlePlugin = "2.8"
 licenseGradlePlugin = "0.9.0"
 gradleVersionsPlugin = "0.43.0"
 versionCatalogUpdatePlugin = "0.7.0"
