@@ -9,9 +9,15 @@ afterEvaluate {
         classifier "sources"
     }
 
-    task javadocJar(type: Jar, dependsOn: dokkaHtml) {
-        classifier = 'javadoc'
-        from dokkaHtml.outputDirectory
+    if (project.tasks.findByName('dokkaHtml')) {
+        task javadocJar(type: Jar, dependsOn: dokkaHtml) {
+            classifier = 'javadoc'
+            from dokkaHtml.outputDirectory
+        }
+    } else {
+        task javadocJar(type: Jar) {
+            classifier = 'javadoc'
+        }
     }
 
     publishing {
