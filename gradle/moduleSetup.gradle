@@ -21,14 +21,12 @@ afterEvaluate { project ->
         
         apply from: gradle.dolbyio.files.license
         apply from: gradle.dolbyio.files.sonarqube
+        apply from: gradle.dolbyio.files.jacoco
     }
 
-    if (isLibrary) {
-        if (hasDokka) {
-            apply from: gradle.dolbyio.files.dokka
-            apply from: gradle.dolbyio.files.dokkaProject
-        }
-        apply from: gradle.dolbyio.files.jacoco
+    if (isLibrary && hasDokka) {
+        apply from: gradle.dolbyio.files.dokka
+        apply from: gradle.dolbyio.files.dokkaProject
     }
 
     apply from: gradle.dolbyio.files.ktlint

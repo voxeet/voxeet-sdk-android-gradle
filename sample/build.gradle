@@ -66,5 +66,4 @@ ext {
     ]
 }
 
-apply from: gradle.dolbyio.files.jacocoProject
 apply from: gradle.dolbyio.files.dependencyUpdates

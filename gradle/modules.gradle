@@ -2,3 +2,5 @@ ext.isSourcesModule = {
     it.file("src/main/java").exists() && it.name != "buildSrc" ||
             it.file("src/main/kotlin").exists() && it.name != "buildSrc"
 }
+
+apply from: gradle.dolbyio.files.jacocoProject

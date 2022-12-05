@@ -38,14 +38,15 @@ task jacocoTestReport(type: JacocoReport, dependsOn: dependsOn) {
             '**/*Module*.*'
     ]
 
-    final mainSrc = "${project.projectDir}/src/main/java"
+    final javaSrc = "${project.projectDir}/src/main/java"
+    final kotlinSrc = "${project.projectDir}/src/main/kotlin"
 
     final androidModuleKotlinFileTree = fileTree(dir: "${project.buildDir}/tmp/kotlin-classes/debug", excludes: jacocoExcludes)
     final androidModuleJavacFileTree = fileTree(dir: "${project.buildDir}/intermediates/javac/debug", excludes: jacocoExcludes)
     final javaModuleKotlinFileTree = fileTree(dir: "${project.buildDir}/classes/kotlin/main", excludes: jacocoExcludes)
     final javaModuleJavacFileTree = fileTree(dir: "${project.buildDir}/classes/java/main", excludes: jacocoExcludes)
 
-    sourceDirectories.setFrom files([mainSrc])
+    sourceDirectories.setFrom files([javaSrc, kotlinSrc])
     classDirectories.setFrom files([
             androidModuleKotlinFileTree,
             androidModuleJavacFileTree,
