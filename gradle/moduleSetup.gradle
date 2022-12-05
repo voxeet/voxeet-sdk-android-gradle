@@ -142,8 +142,10 @@ def setupModule(isAndroid, isAndroidComponent) {
 
 def setupCommonTasks(isAndroid) {
     if (isAndroid) {
+        def unitTestsTasks = project.ext.has("optionalUnitTestTasks") ? project.ext.optionalUnitTestTasks : [ "testDebugUnitTest" ]
+
         tasks.register("unitTest") { task ->
-            task.dependsOn('testDebugUnitTest')
+            task.dependsOn(unitTestsTasks)
         }
     } else {
         tasks.register("unitTest") { task ->
