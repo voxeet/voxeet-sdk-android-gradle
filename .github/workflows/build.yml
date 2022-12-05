@@ -20,13 +20,15 @@ jobs:
         id: build
         run: |
           cd sample
-          ./gradlew ktlint detekt :library:assembleRelease publishToMavenLocal
+          ./gradlew ktlint detekt --no-daemon
+          ./gradlew jacocoProjectReport --no-daemon
+          ./gradlew :library:assembleDebug publishToMavenLocal --no-daemon
 
       - name: Doc
         id: doc
         run: |
           cd sample
-          ./gradlew :library:dokkaHtml :dokkaGfmCollector
+          ./gradlew :library:dokkaHtml :dokkaGfmCollector --no-daemon
 
   build_as_remote:
     runs-on: ubuntu-latest
@@ -42,13 +44,15 @@ jobs:
         id: build
         run: |
           cd sample
-          ./gradlew -PDOLBYIO_GRADLE_VERSION_USED="$GITHUB_SHA" ktlint detekt :library:assembleDebug publishToMavenLocal
+          ./gradlew -PDOLBYIO_GRADLE_VERSION_USED="$GITHUB_SHA" ktlint detekt --no-daemon
+          ./gradlew -PDOLBYIO_GRADLE_VERSION_USED="$GITHUB_SHA" jacocoProjectReport --no-daemon
+          ./gradlew -PDOLBYIO_GRADLE_VERSION_USED="$GITHUB_SHA" :library:assembleDebug publishToMavenLocal --no-daemon
 
       - name: Doc
         id: doc
         run: |
           cd sample
-          ./gradlew -PDOLBYIO_GRADLE_VERSION_USED="$GITHUB_SHA" :library:dokkaHtml :dokkaGfmCollector
+          ./gradlew -PDOLBYIO_GRADLE_VERSION_USED="$GITHUB_SHA" :library:dokkaHtml :dokkaGfmCollector --no-daemon
 
   release:
     runs-on: ubuntu-latest

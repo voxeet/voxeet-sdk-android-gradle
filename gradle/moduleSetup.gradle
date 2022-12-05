@@ -19,9 +19,12 @@ afterEvaluate { project ->
         setupCommonTasks(isAndroid)
         setupKapt(project)
         
-        apply from: gradle.dolbyio.files.license
         apply from: gradle.dolbyio.files.sonarqube
         apply from: gradle.dolbyio.files.jacoco
+    }
+
+    if (isLibrary) {
+        apply from: gradle.dolbyio.files.license
     }
 
     if (isLibrary && hasDokka) {
