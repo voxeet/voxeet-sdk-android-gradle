@@ -1,7 +1,11 @@
 apply plugin: 'jacoco'
 
 def connectedDevices = (rootProject.properties['CONNECTED_DEVICES'] ?: "0").trim() as Integer
-def dependsOn = connectedDevices > 0 ? [ "testDebugUnitTest", "createDebugCoverageReport" ] : [ "testDebugUnitTest" ]
+
+def unitTestsTasks = project.ext.has("optionalUnitTestTasks") ? project.ext.optionalUnitTestTasks : [ "testDebugUnitTest" ]
+def androidTestsTasks = project.ext.has("optionalAndroidTestTasks") ? project.ext.optionalAndroidTestTasks : [ "createDebugCoverageReport" ]
+
+def dependsOn = connectedDevices > 0 ? unitTestsTasks + androidTestsTasks : unitTestsTasks
 
 task jacocoTestReport(type: JacocoReport, dependsOn: dependsOn) {
     group = "Reporting"

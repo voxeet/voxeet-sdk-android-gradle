@@ -1,0 +1,27 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+}
+
+ext {
+    optionalUnitTestTasks = [ "testSomeFlavor1DebugUnitTest" ]
+    optionalAndroidTestTasks = [ "connectedSomeFlavor1DebugAndroidTest" ]
+}
+
+android {
+    namespace 'io.dolby.sample'
+
+    flavorDimensions "flavors"
+    productFlavors {
+        someFlavor1 {
+            dimension "flavors"
+        }
+        someFlavor2 {
+            dimension "flavors"
+        }
+    }
+}
+
+dependencies {
+    implementation project(":library")
+}
