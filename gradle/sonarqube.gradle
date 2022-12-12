@@ -3,7 +3,9 @@ apply plugin: "org.sonarqube"
 def unitTestsTasks = project.ext.has("optionalUnitTestTasks") ? project.ext.optionalUnitTestTasks : [ "testDebugUnitTest" ]
 def paths = unitTestsTasks.collect { "build/test-results/${it}" }
 
-def projectName = "android_sdk_${project.name}"
+def sonarqubePrefix = project.ext.has("sonarqubePrefix") ? project.ext.sonarqubePrefix : "android_sdk_"
+
+def projectName = "${sonarqubePrefix}${project.name}"
 sonarqube {
     properties {
         property "sonar.sourceEncoding", "UTF-8"

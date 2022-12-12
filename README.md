@@ -131,6 +131,18 @@ On top of using the sample, you can also change the default one used, this is fo
 
 ## Configuration
 
+### SonarQube
+
+It is possible to configure the prefix for sonarqube tasks, using in each module's ext :
+
+```
+ext {
+  sonarqubePrefix = "some_prefix_"
+}
+```
+
+It will then be used as "${prefix}${project.name}"
+
 ### Publishing
 
 In your submodule(s)'s build.gradle, use `apply from: gradle.dolbyio.files.publishing`

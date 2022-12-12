@@ -125,6 +125,9 @@ def setupModule(isAndroid, isAndroidComponent) {
             testRuntimeOnly dolbyio.junit.jupiter.engine
             testImplementation dolbyio.junit.jupiter.params
             testRuntimeOnly dolbyio.junit.vintage.engine
+            testImplementation dolbyio.mockito.core
+            testImplementation dolbyio.mockito.kotlin
+            testImplementation dolbyio.kotlinx.coroutines.test
         }
     } else {
         sourceCompatibility = JavaVersion.VERSION_11
