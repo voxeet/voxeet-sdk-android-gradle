@@ -29,6 +29,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: dependsOn) {
             '**/BuildConfig.*',
             '**/Manifest*.*',
             'android/**/*.*',
+            '**/org/webrtc/**/*.*',
             '**/Lambda$*.class',
             '**/Lambda.class',
             '**/*Lambda.class',
