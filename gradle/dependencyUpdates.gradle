@@ -3,6 +3,12 @@ apply plugin: "nl.littlerobots.version-catalog-update"
 
 versionCatalogUpdate {
     sortByKey = false
+
+    versionCatalogs {
+        dolby {
+            catalogFile = file(gradle.dolbyio.files.catalog)
+        }
+    }
 }
 
 dependencyUpdates.resolutionStrategy {
