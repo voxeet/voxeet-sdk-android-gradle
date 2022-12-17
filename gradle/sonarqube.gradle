@@ -19,5 +19,11 @@ sonarqube {
         property "sonar.c.file.suffixes", "-"
         property "sonar.cpp.file.suffixes", "-"
         property "sonar.objc.file.suffixes", "-"
+
+        // kotlin folder is not compatible out of the box, making sure this is the case here
+        if (file("src/main/kotlin").exists()) {
+            properties ["sonar.sources"] += "src/main/kotlin"
+        }
+
     }
 }
