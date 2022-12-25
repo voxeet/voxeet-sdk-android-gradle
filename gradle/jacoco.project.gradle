@@ -17,8 +17,8 @@ gradle.projectsEvaluated {
 
         dependsOn(modules.jacocoTestReport)
 
-        sourceDirectories.setFrom files(modules.jacocoTestReport.sourceDirectories)
-        classDirectories.setFrom files(modules.jacocoTestReport.classDirectories)
-        executionData.setFrom files(modules.jacocoTestReport.executionData)
+        sourceDirectories.setFrom files(modules.jacocoModuleReport.sourceDirectories)
+        classDirectories.setFrom files(modules.jacocoModuleReport.classDirectories)
+        executionData.setFrom files(modules.jacocoModuleReport.executionData)
     }
 }

@@ -7,7 +7,8 @@ def androidTestsTasks = project.ext.has("optionalAndroidTestTasks") ? project.ex
 
 def dependsOn = connectedDevices > 0 ? unitTestsTasks + androidTestsTasks : unitTestsTasks
 
-task jacocoTestReport(type: JacocoReport, dependsOn: dependsOn) {
+println("${project.name} defining jacoco")
+task jacocoModuleReport(type: JacocoReport, dependsOn: dependsOn) {
     group = "Reporting"
     description = "Generate Jacoco coverage reports"
 
