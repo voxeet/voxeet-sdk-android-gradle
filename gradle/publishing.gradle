@@ -3,9 +3,19 @@ apply plugin: 'signing'
 
 afterEvaluate {
 
-    task sourceJar(type: Jar) {
-        from android.sourceSets.main.java.srcDirs
-        classifier "sources"
+    def isJava = project.plugins.hasPlugin("java-library") ||
+            project.plugins.hasPlugin("java")
+
+    if (isJava) {
+        task sourceJar(type: Jar) {
+            from sourceSets.main.allSource
+            classifier "sources"
+        }
+    } else {
+        task sourceJar(type: Jar) {
+            from android.sourceSets.main.java.srcDirs
+            classifier "sources"
+        }
     }
 
     if (project.tasks.findByName('dokkaHtml')) {
@@ -23,18 +33,29 @@ afterEvaluate {
         publications {
             // Creates a Maven publication called "release".
             release(MavenPublication) {
-                // Applies the component for the release build variant.
-                // hack derivated 'from components.release', since we have flavors in the app,
-                // we need to explicitly get the projet's components
-                from project(":${project.name}").components.release
 
-                artifactId = "${project.name}"
-                groupId = rootProject.ext.groupId
-                version = rootProject.ext.version
+                if (isJava) {
+                    artifactId = project.ext.artifactId
+                    groupId = rootProject.ext.groupId
+                    version = rootProject.ext.version
+
+                    artifact("$buildDir/libs/${project.ext.artifactId}.jar") {
+                        builtBy jar
+                    }
+                } else {
+                    // Applies the component for the release build variant.
+                    // hack derivated 'from components.release', since we have flavors in the app,
+                    // we need to explicitly get the projet's components
+                    from project(":${project.name}").components.release
+
+                    artifactId = "${project.name}"
+                    groupId = rootProject.ext.groupId
+                    version = rootProject.ext.version
+                }
 
                 artifact javadocJar
                 if ((rootProject.ext.has("publishWithSources") && rootProject.ext.publishWithSources)
-                    || (project.ext.has("publishWithSources") && project.ext.publishWithSources)) {
+                        || (project.ext.has("publishWithSources") && project.ext.publishWithSources)) {
                     artifact sourceJar
                 }
 
