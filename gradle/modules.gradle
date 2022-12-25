@@ -1,6 +1,8 @@
 ext.isSourcesModule = {
-    it.file("src/main/java").exists() && it.name != "buildSrc" ||
-            it.file("src/main/kotlin").exists() && it.name != "buildSrc"
+    (it.file("src/main/java").exists() && it.name != "buildSrc")
+            || (it.file("src/main/kotlin").exists() && it.name != "buildSrc")
+            || it.file("src/androidMain/kotlin").exists()
+            || it.file("src/commonMain/kotlin").exists()
 }
 
 ext.prop = { name, defValue ->
