@@ -110,6 +110,7 @@ detekt = { module = "io.gitlab.arturbosch.detekt:detekt-cli", version.ref = "det
 ktlint = { module = "com.pinterest:ktlint", version.ref = "ktlint" }
 # Kotlin
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 # Networking
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 okhttp-loggingInterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
