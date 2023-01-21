@@ -110,7 +110,6 @@ detekt = { module = "io.gitlab.arturbosch.detekt:detekt-cli", version.ref = "det
 ktlint = { module = "com.pinterest:ktlint", version.ref = "ktlint" }
 # Kotlin
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 # Networking
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 okhttp-loggingInterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
@@ -222,3 +221,4 @@ coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "kotlin-ksp" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 publish-nexus = { id = "io.github.gradle-nexus.publish-plugin", version.ref = "publish-nexus" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
