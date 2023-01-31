@@ -70,7 +70,7 @@ toolbar-compose = "2.3.5"
 # Voxeet
 voxeet-uxkit = "3.7.0"
 voxeet-promise = "2.8.1"
-voxeet-audio = "2.6.1"
+voxeet-audio = "2.7.0"
 # Dependency injection
 hilt = "2.44"
 # Facebook
