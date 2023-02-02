@@ -91,6 +91,11 @@ afterEvaluate {
         repositories {
             mavenLocal()
 
+            maven {
+                name "cicd"
+                url "file://${rootProject.projectDir}/repository"
+            }
+
             if (null != System.env.CODEARTIFACT_DOMAIN) {
                 // if new repositories needs to be added, it can be done below
                 // and if for those repositories, conditions need to be applied, it can be done using if statements
