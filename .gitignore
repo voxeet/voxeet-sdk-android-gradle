@@ -1,4 +1,5 @@
 # Gradle & idea
+.DS_Store
 .gradle/
 **/gradle/dolbyio/
 build/
