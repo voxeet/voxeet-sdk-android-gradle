@@ -70,7 +70,7 @@ accompanist = "0.27.0"
 destinations-compose = "1.7.22-beta"
 toolbar-compose = "2.3.5"
 # Voxeet
-voxeet-uxkit = "3.7.0"
+voxeet-uxkit = "[3.8.0,)"
 voxeet-promise = "[2.9.0,)"
 voxeet-audio = "2.7.0"
 # Dependency injection
@@ -193,9 +193,9 @@ destinations-compose-animations-core = { module = "io.github.raamcosta.compose-d
 destinations-compose-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "destinations-compose" }
 toolbar-compose = { module = "me.onebone:toolbar-compose", version.ref = "toolbar-compose" }
 # Voxeet
-voxeet-uxkit-systemService = { module = "com.voxeet.sdk:uxkit-system-service", version.ref = "voxeet-uxkit" }
-voxeet-uxkit-exoplayer = { module = "com.voxeet.sdk:uxkit-exoplayer-support", version.ref = "voxeet-uxkit" }
-voxeet-uxkit-youtube = { module = "com.voxeet.sdk:uxkit-youtube", version.ref = "voxeet-uxkit" }
+voxeet-uxkit-systemService = { module = "io.dolby.sdk:uxkit-system-service", version.ref = "voxeet-uxkit" }
+voxeet-uxkit-exoplayer = { module = "io.dolby.sdk:uxkit-exoplayer-support", version.ref = "voxeet-uxkit" }
+voxeet-uxkit-youtube = { module = "io.dolby.sdk:uxkit-youtube", version.ref = "voxeet-uxkit" }
 voxeet-promise = { module = "io.dolby:promise", version.ref = "voxeet-promise" }
 voxeet-promise-ktx = { module = "io.dolby:promise-ktx", version.ref = "voxeet-promise" }
 voxeet-audio = { module = "io.dolby:audio", version.ref = "voxeet-audio" }
