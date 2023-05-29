@@ -2,12 +2,16 @@ apply plugin: 'jacoco'
 
 def connectedDevices = (rootProject.properties['CONNECTED_DEVICES'] ?: "0").trim() as Integer
 
-def unitTestsTasks = project.ext.has("optionalUnitTestTasks") ? project.ext.optionalUnitTestTasks : [ "testDebugUnitTest" ]
-def androidTestsTasks = project.ext.has("optionalAndroidTestTasks") ? project.ext.optionalAndroidTestTasks : [ "createDebugCoverageReport" ]
+def unitTestsTasks = project.ext.has("optionalUnitTestTasks") ? project.ext.optionalUnitTestTasks : ["testDebugUnitTest"]
+def androidTestsTasks = project.ext.has("optionalAndroidTestTasks") ? project.ext.optionalAndroidTestTasks : ["createDebugCoverageReport"]
 
 def dependsOn = connectedDevices > 0 ? unitTestsTasks + androidTestsTasks : unitTestsTasks
 
-println("${project.name} defining jacoco")
+// Add support for kotlin multiplatform's check task
+if (project.tasks.findByName("check")) {
+    dependsOn += "check"
+}
+
 task jacocoModuleReport(type: JacocoReport, dependsOn: dependsOn) {
     group = "Reporting"
     description = "Generate Jacoco coverage reports"
@@ -46,13 +50,14 @@ task jacocoModuleReport(type: JacocoReport, dependsOn: dependsOn) {
 
     final javaSrc = "${project.projectDir}/src/main/java"
     final kotlinSrc = "${project.projectDir}/src/main/kotlin"
+    final multiplatformSrc = "${project.projectDir}/src/commonMain/kotlin"
 
     final androidModuleKotlinFileTree = fileTree(dir: "${project.buildDir}/tmp/kotlin-classes/debug", excludes: jacocoExcludes)
     final androidModuleJavacFileTree = fileTree(dir: "${project.buildDir}/intermediates/javac/debug", excludes: jacocoExcludes)
     final javaModuleKotlinFileTree = fileTree(dir: "${project.buildDir}/classes/kotlin/main", excludes: jacocoExcludes)
     final javaModuleJavacFileTree = fileTree(dir: "${project.buildDir}/classes/java/main", excludes: jacocoExcludes)
 
-    sourceDirectories.setFrom files([javaSrc, kotlinSrc])
+    sourceDirectories.setFrom files([javaSrc, kotlinSrc, multiplatformSrc])
     classDirectories.setFrom files([
             androidModuleKotlinFileTree,
             androidModuleJavacFileTree,

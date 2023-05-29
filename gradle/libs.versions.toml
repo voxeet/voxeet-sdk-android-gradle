@@ -8,8 +8,7 @@ gradleVersionsPlugin = "0.43.0"
 versionCatalogUpdatePlugin = "0.7.0"
 mkdocsGradlePlugin = "3.0.0"
 # Expected Android SDK
-# minSdkVersion is temporarily bumped to 25
-minSdkVersion = "25"
+minSdkVersion = "23"
 targetSdkVersion = "33"
 compileSdkVersion = "33"
 # Dokka
