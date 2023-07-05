@@ -38,10 +38,19 @@ task jacocoTestReport(type: JacocoReport, dependsOn: dependsOn) {
             '**/*Builder.*',
             '**/*_MembersInjector.class',
             '**/*_MembersInjector*.*',
+            '**/Dagger*Component*.class',
+            '**/Dagger*Subcomponent*.class',
+            '**/*Subcomponent$Builder.class',
+            '**/*Module_*Factory.class',
             '**/*_*Factory*.*',
             '**/*Component*.*',
-            '**/*Module*.*'
+            '**/*Module*.*',
+            'dagger/**',
+            'hilt_aggregated_deps/**'
     ]
+
+    def extraExcludes = project.ext.has("jacocoExtraExcludes") ? project.ext.jacocoExtraExcludes : [ ]
+    jacocoExcludes.addAll(extraExcludes)
 
     final javaSrc = "${project.projectDir}/src/main/java"
     final kotlinSrc = "${project.projectDir}/src/main/kotlin"
