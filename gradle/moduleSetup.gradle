@@ -36,13 +36,17 @@ afterEvaluate { project ->
     apply from: gradle.dolbyio.files.detekt
 }
 
+def minSdk = project.ext.has("minSdkVersion")
+    ? project.ext.minSdkVersion
+    : "${dolbyio.versions.minSdkVersion.get()}"
+
 def setupModule(isAndroid, isAndroidComponent) {
     if (isAndroid) {
         android {
             compileSdkVersion Integer.parseInt(dolbyio.versions.compileSdkVersion.get())
 
             defaultConfig {
-                minSdkVersion dolbyio.versions.minSdkVersion.get()
+                minSdkVersion "${minSdk}"
                 targetSdkVersion Integer.parseInt(dolbyio.versions.targetSdkVersion.get())
 
                 testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
