@@ -3,6 +3,8 @@ apply plugin: 'signing'
 
 afterEvaluate {
 
+    def signingKeyId = rootProject.ext.prop("signingKeyId", null) as String
+
     task sourceJar(type: Jar) {
         from android.sourceSets.main.java.srcDirs
         classifier "sources"
@@ -111,6 +113,7 @@ afterEvaluate {
     signing {
         setRequired {
             gradle.taskGraph.allTasks.any { it instanceof PublishToMavenRepository }
+                    && (null != signingKeyId && signingKeyId.length() > 0)
         }
         sign publishing.publications.release
     }
