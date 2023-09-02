@@ -69,11 +69,6 @@ def setupModule(isAndroid, isAndroidComponent) {
                 targetCompatibility JavaVersion.VERSION_11
             }
 
-            kotlinOptions {
-                jvmTarget = "11"
-                freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
-            }
-
             kotlin {
                 sourceSets {
                     debug {
@@ -136,12 +131,6 @@ def setupModule(isAndroid, isAndroidComponent) {
     } else {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-
-        compileKotlin.kotlinOptions.jvmTarget = "11"
-        compileTestKotlin.kotlinOptions.jvmTarget = "11"
-
-        compileKotlin.kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
-        compileTestKotlin.kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
 
         test {
             maxParallelForks = Runtime.runtime.availableProcessors() - 1
