@@ -9,8 +9,8 @@ versionCatalogUpdatePlugin = "0.7.0"
 mkdocsGradlePlugin = "3.0.0"
 # Expected Android SDK
 minSdkVersion = "23"
-targetSdkVersion = "33"
-compileSdkVersion = "33"
+targetSdkVersion = "34"
+compileSdkVersion = "34"
 # Dokka
 dokka = "1.7.20"
 dokka-supress-undocumented = "1.1"
