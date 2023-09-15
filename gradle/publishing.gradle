@@ -7,17 +7,17 @@ afterEvaluate {
 
     task sourceJar(type: Jar) {
         from android.sourceSets.main.java.srcDirs
-        classifier "sources"
+        archiveClassifier.set("sources")
     }
 
     if (project.tasks.findByName('dokkaHtml')) {
         task javadocJar(type: Jar, dependsOn: dokkaHtml) {
-            classifier = 'javadoc'
+            archiveClassifier.set("javadoc")
             from dokkaHtml.outputDirectory
         }
     } else {
         task javadocJar(type: Jar) {
-            classifier = 'javadoc'
+            archiveClassifier.set("javadoc")
         }
     }
 
