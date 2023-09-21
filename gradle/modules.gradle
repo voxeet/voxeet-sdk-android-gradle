@@ -3,4 +3,9 @@ ext.isSourcesModule = {
             it.file("src/main/kotlin").exists() && it.name != "buildSrc"
 }
 
+ext.prop = { name, defValue ->
+    return rootProject.properties.containsKey(name)
+            ? rootProject.properties[name] : defValue
+}
+
 apply from: gradle.dolbyio.files.jacocoProject

@@ -11,12 +11,11 @@ task ktlint(type: JavaExec, group: "verification") {
     mainClass = "com.pinterest.ktlint.Main"
     inputs.files(fileTree("src").matching {
         include "**/*.kt"
-        exclude "test/**/*.kt", "androidTest/**/*.kt"
     })
     outputs.file("build/reports/ktlint-report.xml")
     outputs.cacheIf { true }
 
-    args "src/**/*.kt", "!src/test/**/*.kt", "!src/androidTest/**/*.kt",
+    args "src/**/*.kt",
             "--editorconfig=${gradle.dolbyio.files.ktlintConfig}",
             "--reporter=checkstyle,output=build/reports/ktlint-report.xml",
             "--reporter=plain"
