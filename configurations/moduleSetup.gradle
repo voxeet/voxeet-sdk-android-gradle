@@ -11,14 +11,14 @@ afterEvaluate { project ->
 
     def isLibrary = project.plugins.hasPlugin("java-library") ||
             project.plugins.hasPlugin("com.android.library")
-    
+
     def hasDokka = rootProject.plugins.hasPlugin("org.jetbrains.dokka")
 
     if (isAndroid || isJava) {
         setupModule(isAndroid, isAndroidComponent)
         setupCommonTasks(isAndroid)
         setupKapt(project)
-        
+
         apply from: gradle.dolbyio.files.sonarqube
         apply from: gradle.dolbyio.files.jacoco
     }
@@ -37,10 +37,12 @@ afterEvaluate { project ->
 }
 
 def minSdk = project.ext.has("minSdkVersion")
-    ? project.ext.minSdkVersion
-    : "${dolbyio.versions.minSdkVersion.get()}"
+        ? project.ext.minSdkVersion
+        : "${dolbyio.versions.minSdkVersion.get()}"
 
 def setupModule(isAndroid, isAndroidComponent) {
+    def javaVersion = JavaVersion.toVersion(dolbyio.versions.java.get())
+
     if (isAndroid) {
         android {
             compileSdkVersion Integer.parseInt(dolbyio.versions.compileSdkVersion.get())
@@ -65,8 +67,12 @@ def setupModule(isAndroid, isAndroidComponent) {
 
             compileOptions {
                 coreLibraryDesugaringEnabled true
-                sourceCompatibility JavaVersion.VERSION_11
-                targetCompatibility JavaVersion.VERSION_11
+                sourceCompatibility javaVersion
+                targetCompatibility javaVersion
+            }
+
+            kotlinOptions {
+                jvmTarget = dolbyio.versions.java.get()
             }
 
             kotlin {
@@ -129,8 +135,8 @@ def setupModule(isAndroid, isAndroidComponent) {
             testImplementation dolbyio.kotlinx.coroutines.test
         }
     } else {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = javaVersion
+        targetCompatibility = javaVersion
 
         test {
             maxParallelForks = Runtime.runtime.availableProcessors() - 1
@@ -141,7 +147,7 @@ def setupModule(isAndroid, isAndroidComponent) {
 
 def setupCommonTasks(isAndroid) {
     if (isAndroid) {
-        def unitTestsTasks = project.ext.has("optionalUnitTestTasks") ? project.ext.optionalUnitTestTasks : [ "testDebugUnitTest" ]
+        def unitTestsTasks = project.ext.has("optionalUnitTestTasks") ? project.ext.optionalUnitTestTasks : ["testDebugUnitTest"]
 
         tasks.register("unitTest") { task ->
             task.dependsOn(unitTestsTasks)
@@ -150,6 +156,23 @@ def setupCommonTasks(isAndroid) {
         tasks.register("unitTest") { task ->
             task.dependsOn('test')
         }
+    }
+
+    def javaVersion = dolbyio.versions.java.get()
+    try {
+        def klass = Class.forName("org.jetbrains.kotlin.gradle.tasks.KotlinCompile")
+        tasks.withType(klass).configureEach {
+            kotlinOptions {
+                jvmTarget = javaVersion
+            }
+        }
+    } catch (Throwable ignored) {
+        // nothing
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        sourceCompatibility = javaVersion
+        targetCompatibility = javaVersion
     }
 }
 
