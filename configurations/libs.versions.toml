@@ -1,6 +1,6 @@
 [versions]
 # Gradle plugins
-androidGradlePlugin = "8.1.0"
+androidGradlePlugin = "8.1.2"
 gradleNexusPlugin = "2.3.1"
 sonarqubeGradlePlugin = "2.8"
 licenseGradlePlugin = "0.9.0"
@@ -8,9 +8,9 @@ gradleVersionsPlugin = "0.43.0"
 versionCatalogUpdatePlugin = "0.7.0"
 mkdocsGradlePlugin = "3.0.0"
 # Expected Android SDK
-minSdkVersion = "21"
-targetSdkVersion = "33"
-compileSdkVersion = "33"
+minSdkVersion = "24"
+targetSdkVersion = "34"
+compileSdkVersion = "34"
 cmakeVersion = "3.22.1"
 ndkVersion = "23.0.7599858"
 # Dokka

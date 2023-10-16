@@ -1,10 +1,9 @@
 //in order to change the version used, change this or override DOLBYIO_GRADLE_VERSION_USED (sha, tag, etc...)
-def version = 'main'
 
-def dolbyioGradle = "../dolbyio.gradle"
+def dolbyioGradle = "./dolbyio.gradle"
 
 if (settings.ext.find("DOLBYIO_GRADLE_VERSION_USED")) {
-    version = DOLBYIO_GRADLE_VERSION_USED
+    def version = DOLBYIO_GRADLE_VERSION_USED
     def random = new Random()
     dolbyioGradle = "https://raw.githubusercontent.com/voxeet/voxeet-sdk-android-gradle/${version}/dolbyio.gradle?rand=${random.nextInt()}"
 }
@@ -19,4 +18,7 @@ dependencyResolutionManagement {
     }
 }
 
-include ":library", ":app"
+["library", "app"].each {
+    include ":$it"
+    project(":$it").projectDir = new File(rootProject.projectDir, "sample/$it")
+}

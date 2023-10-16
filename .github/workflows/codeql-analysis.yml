@@ -63,7 +63,6 @@ jobs:
 
     - name: Build and Install
       run: |
-        cd sample
         ./gradlew :library:assembleDebug
 
     - name: Perform CodeQL Analysis
