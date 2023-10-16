@@ -71,10 +71,6 @@ def setupModule(isAndroid, isAndroidComponent) {
                 targetCompatibility javaVersion
             }
 
-            kotlinOptions {
-                jvmTarget = dolbyio.versions.java.get()
-            }
-
             kotlin {
                 sourceSets {
                     debug {
