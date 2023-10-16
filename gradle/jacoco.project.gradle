@@ -11,14 +11,19 @@ gradle.projectsEvaluated {
             html.required = true
         }
 
-        def modules = rootProject.subprojects.findAll {
+        def moduleReports = rootProject.subprojects.findAll {
+            isSourcesModule(it) && it.tasks.findByName("jacocoModuleReport")
+        }
+
+        def testReports = rootProject.subprojects.findAll {
             isSourcesModule(it) && it.hasProperty("jacocoTestReport")
         }
 
-        dependsOn(modules.jacocoTestReport)
+        dependsOn(testReports.jacocoTestReport)
+        dependsOn(moduleReports.jacocoModuleReport)
 
-        sourceDirectories.setFrom files(modules.jacocoTestReport.sourceDirectories)
-        classDirectories.setFrom files(modules.jacocoTestReport.classDirectories)
-        executionData.setFrom files(modules.jacocoTestReport.executionData)
+        sourceDirectories.setFrom files(moduleReports.jacocoModuleReport.sourceDirectories)
+        classDirectories.setFrom files(moduleReports.jacocoModuleReport.classDirectories)
+        executionData.setFrom files(moduleReports.jacocoModuleReport.executionData)
     }
 }
