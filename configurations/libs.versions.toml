@@ -94,6 +94,8 @@ coil = "2.2.2"
 # Nexus publication
 publish-nexus = "1.3.0"
 
+# Set of components & tools
+codlab-libraries = "1.7.0"
 
 [libraries]
 # Gradle plugins
@@ -220,6 +222,15 @@ desugarJdkLibs = { module = "com.android.tools:desugar_jdk_libs", version.ref = 
 processPhoenix = { module = "com.jakewharton:process-phoenix", version.ref = "processPhoenix" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
+
+# Set of components & tools
+safearea = { module = "eu.codlab:kotlin-safearea", version.ref = "codlab-libraries" }
+collapsing-toolbar = { module = "eu.codlab:kotlin-collapsing-toolbar", version.ref = "codlab-libraries" }
+moko-resources-ext = { module = "eu.codlab:kotlin-moko-resources-ext", version.ref = "codlab-libraries" }
+kamel-image-ext = { module = "eu.codlab:kotlin-kamel-image-ext", version.ref = "codlab-libraries" }
+widgets-compose = { module = "eu.codlab:kotlin-widgets-compose", version.ref = "codlab-libraries" }
+file-access = { module = "eu.codlab:kotlin-file-access", version.ref = "codlab-libraries" }
+http-client = { module = "eu.codlab:kotlin-http-client", version.ref = "codlab-libraries" }
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "kotlin-ksp" }
