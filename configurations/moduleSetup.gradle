@@ -45,10 +45,10 @@ def setupModule(isAndroid, isAndroidComponent) {
 
     if (isAndroid) {
         android {
-            compileSdkVersion Integer.parseInt(dolbyio.versions.compileSdkVersion.get())
+            compileSdk Integer.parseInt(dolbyio.versions.compileSdkVersion.get())
 
             defaultConfig {
-                minSdkVersion "${minSdk}"
+                minSdkVersion dolbyio.versions.minSdkVersion.get()
                 targetSdkVersion Integer.parseInt(dolbyio.versions.targetSdkVersion.get())
 
                 testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
