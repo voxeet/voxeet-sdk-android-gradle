@@ -2,9 +2,10 @@ buildscript {
     apply from: gradle.dolbyio.files.modules
 
     repositories {
+        mavenLocal() // <- waiting for the managed device validation, forcing resolution first
+        mavenCentral() // <- waiting for the managed device validation, forcing resolution first
         gradlePluginPortal()
         google()
-        mavenCentral()
     }
     dependencies {
         classpath dolbyio.android.gradlePlugin
@@ -17,12 +18,14 @@ buildscript {
         classpath dolbyio.hilt.gradle
         classpath dolbyio.mkdocs.gradlePlugin
         classpath dolbyio.dokka.gradlePlugin
+        classpath dolbyio.managed.device.gradlePlugin
     }
 }
 
 plugins {
     alias(dolbyio.plugins.dokka)
     alias(dolbyio.plugins.publish.nexus)
+    alias(dolbyio.plugins.managed.device) apply false
 }
 
 allprojects {

@@ -2,6 +2,7 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "jvmCompat"
+    alias(dolbyio.plugins.managed.device)
 }
 
 ext {
