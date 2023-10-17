@@ -22,8 +22,17 @@ android {
             dimension "flavors"
         }
     }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = dolbyio.versions.androidx.compose.compiler.get()
+    }
 }
 
 dependencies {
     implementation project(":library")
+    implementation(dolbyio.androidx.compose.runtime)
 }
