@@ -22,3 +22,5 @@ dependencyResolutionManagement {
     include ":$it"
     project(":$it").projectDir = new File(rootProject.projectDir, "sample/$it")
 }
+
+includeBuild "configurations/kt-plugins"

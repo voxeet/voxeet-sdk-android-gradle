@@ -1,8 +1,10 @@
-def version = 'v1.0.1'
+def version = 'v1.1.0'
 
 if (settings.ext.find("DOLBYIO_GRADLE_VERSION_USED")) {
     version = DOLBYIO_GRADLE_VERSION_USED
 }
+
+def urlRoot = "https://raw.githubusercontent.com/voxeet/voxeet-sdk-android-gradle/${version}/configurations/"
 
 def files = [
   "dependencyUpdates",
@@ -47,7 +49,7 @@ files.each {
   if (null != currentDir) {
     result = "${currentDir}/configurations/${it.value}"
   } else {
-    def url = "https://raw.githubusercontent.com/voxeet/voxeet-sdk-android-gradle/${version}/configurations/${it.value}?timestamp=${random.nextInt()}"
+    def url = "$urlRoot/${it.value}?timestamp=${random.nextInt()}"
     def file = new File(result)
 
     if (!file.exists()) {
@@ -62,3 +64,27 @@ gradle.ext.dolbyio = [
   files: files
 ]
 
+// now manage kt-plugins
+// create the kt-plugins/src/main/kotlin
+if (null == currentDir) {
+  println("managing the integration of the kt-plugins")
+  def ktpluginKotlinDir = file("$output/kt-plugins/src/main/kotlin")
+  if (!ktpluginKotlinDir.exists()) {
+    ktpluginKotlinDir.mkdirs()
+  }
+
+  [
+   "kt-plugins/build.gradle.kts",
+   "kt-plugins/settings.gradle",
+   "kt-plugins/src/main/kotlin/jvmCompat.gradle.kts",
+  ].each {outputFile ->
+    def url = "$urlRoot/$outputFile?timestamp=${random.nextInt()}"
+    def file = new File(output, outputFile)
+
+    if (!file.exists()) {
+      new URL(url).withInputStream{ i -> file.withOutputStream{ it << i }}
+    }
+  }
+} else {
+  println("skip downloading kt-plugins as it's a local build")
+}
