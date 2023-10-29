@@ -1,4 +1,4 @@
-def version = 'v1.3.1'
+def version = 'v1.4.0'
 
 if (settings.ext.find("DOLBYIO_GRADLE_VERSION_USED")) {
     version = DOLBYIO_GRADLE_VERSION_USED
@@ -76,6 +76,8 @@ if (null == currentDir) {
   [
    "kt-plugins/build.gradle.kts",
    "kt-plugins/settings.gradle",
+   "kt-plugins/src/main/kotlin/getExtraString.kt",
+   "kt-plugins/src/main/kotlin/iosSimulatorConfiguration.gradle.kts",
    "kt-plugins/src/main/kotlin/jvmCompat.gradle.kts",
    "kt-plugins/src/main/kotlin/publication.gradle.kts",
   ].each {outputFile ->

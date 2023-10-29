@@ -3,12 +3,8 @@ plugins {
     id("signing")
 }
 
-fun getExtraString(name: String, default: String = "") =
-    if (rootProject.extra.has(name)) rootProject.extra[name]?.toString()
-    else default
-
-val sonatypeUsername = getExtraString("sonatypeUsername") ?: ""
-val sonatypePassword = getExtraString("sonatypePassword") ?: ""
+val sonatypeUsername = rootProject.getExtraString("sonatypeUsername") ?: ""
+val sonatypePassword = rootProject.getExtraString("sonatypePassword") ?: ""
 
 val javadocJar by tasks.registering(Jar::class) {
     archiveClassifier.set("javadoc")
@@ -53,32 +49,32 @@ publishing {
         // Provide artifacts information requited by Maven Central
         pom {
             name.set(actualName)
-            description.set(getExtraString("pomDescription"))
-            url.set(getExtraString("pomUrl"))
+            description.set(rootProject.getExtraString("pomDescription"))
+            url.set(rootProject.getExtraString("pomUrl"))
 
             licenses {
                 license {
-                    name.set(getExtraString("pomLicenseName"))
-                    url.set(getExtraString("pomLicenseUrl"))
-                    distribution.set(getExtraString("pomLicenseDistribution"))
+                    name.set(rootProject.getExtraString("pomLicenseName"))
+                    url.set(rootProject.getExtraString("pomLicenseUrl"))
+                    distribution.set(rootProject.getExtraString("pomLicenseDistribution"))
                 }
             }
             developers {
                 developer {
-                    id.set(getExtraString("pomDeveloperId"))
-                    name.set(getExtraString("pomDeveloperName"))
-                    organization.set(getExtraString("pomDeveloperOrganization"))
-                    organizationUrl.set(getExtraString("pomDeveloperOrganizationUrl"))
+                    id.set(rootProject.getExtraString("pomDeveloperId"))
+                    name.set(rootProject.getExtraString("pomDeveloperName"))
+                    organization.set(rootProject.getExtraString("pomDeveloperOrganization"))
+                    organizationUrl.set(rootProject.getExtraString("pomDeveloperOrganizationUrl"))
                 }
             }
             scm {
-                url.set(getExtraString("pomScmUrl"))
+                url.set(rootProject.getExtraString("pomScmUrl"))
             }
         }
     }
 }
 
 signing {
-    isRequired = (null != getExtraString("signingKeyId"))
+    isRequired = (null != rootProject.getExtraString("signingKeyId"))
     sign(publishing.publications)
 }
