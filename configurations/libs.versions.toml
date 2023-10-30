@@ -97,6 +97,7 @@ coil = "2.2.2"
 publish-nexus = "1.3.0"
 
 # Set of components & tools
+multiplatform-precompose = "1.5.1"
 codlab-libraries = "1.10.0"
 versions = "0.47.0"
 
@@ -244,6 +245,7 @@ multiplatform-widgets-compose = { module = "eu.codlab:kotlin-widgets-compose", v
 multiplatform-file-access = { module = "eu.codlab:kotlin-file-access", version.ref = "codlab-libraries" }
 multiplatform-http-client = { module = "eu.codlab:kotlin-http-client", version.ref = "codlab-libraries" }
 multiplatform-platform = { module = "eu.codlab:kotlin-platform", version.ref = "codlab-libraries" }
+multiplatform-precompose = { module = "moe.tlaster:precompose", version.ref = "multiplatform-precompose" }
 managed-device-gradlePlugin = { module = "eu.codlab.gradle.plugin.managed-device:eu.codlab.gradle.plugin.managed-device.gradle.plugin", version.ref = "codlab-libraries" }
 
 [plugins]
