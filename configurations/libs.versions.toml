@@ -249,6 +249,8 @@ multiplatform-file-access = { module = "eu.codlab:kotlin-file-access", version.r
 multiplatform-http-client = { module = "eu.codlab:kotlin-http-client", version.ref = "codlab-libraries" }
 multiplatform-platform = { module = "eu.codlab:kotlin-platform", version.ref = "codlab-libraries" }
 multiplatform-precompose = { module = "moe.tlaster:precompose", version.ref = "multiplatform-precompose" }
+multiplatform-permissions = { module = "eu.codlab:kotlin-permissions", version.ref = "codlab-libraries" }
+multiplatform-viewmodel = { module = "eu.codlab:kotlin-viewmodel", version.ref = "codlab-libraries" }
 managed-device-gradlePlugin = { module = "eu.codlab.gradle.plugin.managed-device:eu.codlab.gradle.plugin.managed-device.gradle.plugin", version.ref = "codlab-libraries" }
 
 # License reporting
