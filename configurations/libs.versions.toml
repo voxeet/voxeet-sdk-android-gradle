@@ -105,6 +105,9 @@ versions = "0.47.0"
 moko-resources = "0.23.0"
 multiplatform-buildkonfig = "0.13.3"
 
+# License reporting
+libraries-report = "10.9.0-b02"
+
 [libraries]
 # Gradle plugins
 android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
@@ -248,6 +251,9 @@ multiplatform-platform = { module = "eu.codlab:kotlin-platform", version.ref = "
 multiplatform-precompose = { module = "moe.tlaster:precompose", version.ref = "multiplatform-precompose" }
 managed-device-gradlePlugin = { module = "eu.codlab.gradle.plugin.managed-device:eu.codlab.gradle.plugin.managed-device.gradle.plugin", version.ref = "codlab-libraries" }
 
+# License reporting
+libraries-report = { group = "com.mikepenz", name = "aboutlibraries-core", version.ref = "libraries-report" }
+
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "kotlin-ksp" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
@@ -272,3 +278,6 @@ jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "jetbrains-com
 # kotlin & compose related plugins
 multiplatform-buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "multiplatform-buildkonfig" }
 multiplatform-moko-resources-generator = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "moko-resources" }
+
+# License reporting
+libraries-report = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "libraries-report" }
