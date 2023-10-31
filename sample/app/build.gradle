@@ -6,8 +6,8 @@ plugins {
 }
 
 ext {
-    optionalUnitTestTasks = [ "testSomeFlavor1DebugUnitTest" ]
-    optionalAndroidTestTasks = [ "connectedSomeFlavor1DebugAndroidTest" ]
+    optionalUnitTestTasks = ["testSomeFlavor1DebugUnitTest"]
+    optionalAndroidTestTasks = ["connectedSomeFlavor1DebugAndroidTest"]
 }
 
 android {
@@ -35,4 +35,14 @@ android {
 dependencies {
     implementation project(":library")
     implementation(dolbyio.androidx.compose.runtime)
+
+    implementation(dolbyio.multiplatform.collapsing.toolbar)
+    implementation(dolbyio.multiplatform.file.access)
+    implementation(dolbyio.multiplatform.http.client)
+    implementation(dolbyio.multiplatform.permissions)
+    implementation(dolbyio.multiplatform.platform)
+    implementation(dolbyio.multiplatform.precompose)
+    implementation(dolbyio.multiplatform.safearea)
+    implementation(dolbyio.multiplatform.viewmodel)
+    implementation(dolbyio.multiplatform.widgets.compose)
 }
