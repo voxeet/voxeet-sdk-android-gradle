@@ -109,6 +109,9 @@ multiplatform-buildkonfig = "0.13.3"
 # License reporting
 libraries-report = "10.9.0-b02"
 
+# Firebase
+firebase-bom = "32.5.0"
+
 [libraries]
 # Gradle plugins
 android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
@@ -257,6 +260,13 @@ managed-device-gradlePlugin = { module = "eu.codlab.gradle.plugin.managed-device
 
 # License reporting
 libraries-report = { group = "com.mikepenz", name = "aboutlibraries-core", version.ref = "libraries-report" }
+
+# Firebase
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx" }
+firebase-pref = { group = "com.google.firebase", name = "firebase-perf-ktx" }
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "kotlin-ksp" }
