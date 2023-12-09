@@ -19,6 +19,7 @@ buildscript {
         classpath dolbyio.mkdocs.gradlePlugin
         classpath dolbyio.dokka.gradlePlugin
         classpath dolbyio.managed.device.gradlePlugin
+        classpath dolbyio.openstf.gradlePlugin
     }
 }
 
@@ -26,6 +27,7 @@ plugins {
     alias(dolbyio.plugins.dokka)
     alias(dolbyio.plugins.publish.nexus)
     alias(dolbyio.plugins.managed.device) apply false
+    alias(dolbyio.plugins.openstf)
 }
 
 allprojects {
