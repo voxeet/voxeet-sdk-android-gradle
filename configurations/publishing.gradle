@@ -10,10 +10,10 @@ afterEvaluate {
         archiveClassifier.set("sources")
     }
 
-    if (project.tasks.findByName('dokkaHtml')) {
-        task javadocJar(type: Jar, dependsOn: dokkaHtml) {
+    if (project.tasks.findByName('dokkaJavadoc')) {
+        task javadocJar(type: Jar, dependsOn: dokkaJavadoc) {
             archiveClassifier.set("javadoc")
-            from dokkaHtml.outputDirectory
+            from dokkaJavadoc.outputDirectory
         }
     } else {
         task javadocJar(type: Jar) {
