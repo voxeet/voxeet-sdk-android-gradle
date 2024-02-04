@@ -3,7 +3,9 @@ apply plugin: 'signing'
 
 afterEvaluate {
 
-    def signingKeyId = rootProject.ext.prop("signingKeyId", null) as String
+    def signingKeyId = [ "signing.keyId", "signingKeyId"]
+            .collect { rootProject.ext.prop(it, null) }
+            .find { null != it} as String
 
     task sourceJar(type: Jar) {
         from android.sourceSets.main.java.srcDirs

@@ -74,7 +74,10 @@ publishing {
     }
 }
 
+val hasSigningKeyId = listOf("signing.keyId", "signingKeyId")
+    .mapNotNull { rootProject.getExtraString(it) }.isNotEmpty()
+
 signing {
-    isRequired = (null != rootProject.getExtraString("signingKeyId"))
+    isRequired = hasSigningKeyId
     sign(publishing.publications)
 }
