@@ -7,6 +7,11 @@ afterEvaluate {
             .collect { rootProject.ext.prop(it, null) }
             .find { null != it} as String
 
+    def isSigned = null != signingKeyId || null != rootProject.ext.prop("SIGN", null)
+
+    println("publication: Using signature key matching id ${signingKeyId}")
+    println("publication: will the package be signed ? ${isSigned}")
+
     task sourceJar(type: Jar) {
         from android.sourceSets.main.java.srcDirs
         archiveClassifier.set("sources")
@@ -113,10 +118,7 @@ afterEvaluate {
     }
 
     signing {
-        setRequired {
-            gradle.taskGraph.allTasks.any { it instanceof PublishToMavenRepository }
-                    && (null != signingKeyId && signingKeyId.length() > 0)
-        }
+        setRequired { isSigned }
         sign publishing.publications.release
     }
 }
