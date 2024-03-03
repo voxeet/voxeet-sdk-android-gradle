@@ -45,4 +45,5 @@ dependencies {
     implementation(dolbyio.multiplatform.safearea)
     implementation(dolbyio.multiplatform.viewmodel)
     implementation(dolbyio.multiplatform.widgets.compose)
+    implementation(dolbyio.multiplatform.string.fuzzywuzzy)
 }
