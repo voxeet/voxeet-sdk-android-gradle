@@ -105,6 +105,7 @@ versions = "0.47.0"
 # Multiplatform
 moko-resources = "0.23.0"
 multiplatform-buildkonfig = "0.13.3"
+fuzzywuzzy-multiplatform = "0.1.1"
 
 # License reporting
 libraries-report = "10.9.0-b02"
@@ -259,6 +260,7 @@ multiplatform-viewmodel = { module = "eu.codlab:kotlin-viewmodel", version.ref =
 multiplatform-viewpager = { module = "eu.codlab:kotlin-viewpager", version.ref = "codlab-libraries" }
 multiplatform-maps-compose = { module = "eu.codlab:kotlin-moko-maps-compose", version.ref = "codlab-libraries" }
 multiplatform-openstf-api = { module = "eu.codlab:kotlin-openstf-api", version.ref = "codlab-libraries" }
+multiplatform-string-fuzzywuzzy = { module = "eu.codlab:fuzzywuzzy-kotlin", version.ref = "fuzzywuzzy-multiplatform" }
 managed-device-gradlePlugin = { module = "eu.codlab.gradle.plugin.managed-device:eu.codlab.gradle.plugin.managed-device.gradle.plugin", version.ref = "codlab-libraries" }
 openstf-gradlePlugin = { module = "eu.codlab.gradle.plugin.openstf-gradle:eu.codlab.gradle.plugin.openstf-gradle.gradle.plugin", version.ref = "codlab-libraries" }
 
