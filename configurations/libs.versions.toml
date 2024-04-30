@@ -61,7 +61,7 @@ androidx-lifecycle = "2.5.1"
 androidx-lifecycle-runtime-compose = "2.6.0-alpha01"
 androidx-multidex = "2.0.1"
 androidx-navigation = "2.5.2"
-androidx-datastore-preferences = "1.0.0"
+androidx-datastore = "1.1.0"
 androidx-core-splashscreen = "1.0.0"
 material = "1.7.0"
 # Compose
@@ -80,6 +80,7 @@ voxeet-promise = "[2.9.0,)"
 voxeet-audio = "2.7.0"
 # Dependency injection
 hilt = "2.44"
+koin = "3.5.6"
 # Facebook
 facebook-soloader = "0.10.4"
 # Logs
@@ -106,6 +107,7 @@ versions = "0.47.0"
 moko-resources = "0.23.0"
 multiplatform-buildkonfig = "0.13.3"
 fuzzywuzzy-multiplatform = "0.1.1"
+preferences-library = "1.0.0"
 
 # License reporting
 libraries-report = "10.9.0-b02"
@@ -184,7 +186,8 @@ androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtim
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
-androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore-preferences" }
+androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "androidx-datastore" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore" }
 androidx-material = { module = "com.google.android.material:material", version.ref = "material" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "androidx-core-splashscreen" }
 
@@ -204,6 +207,7 @@ androidx-compose-ui-toolingPreview = { module = "androidx.compose.ui:ui-tooling-
 androidx-compose-animation = { module = "androidx.compose.animation:animation", version.ref = "androidx-compose" }
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "androidx-compose" }
 androidx-compose-material = { module = "androidx.compose.material:material", version.ref = "androidx-compose" }
+androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "androidx-compose" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "androidx-compose-material3" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidx-hilt-navigation-compose" }
@@ -233,6 +237,7 @@ hilt-core = { module = "com.google.dagger:hilt-core", version.ref = "hilt" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 # Logs
 sentry = { module = "io.sentry:sentry-android", version.ref = "sentry" }
 slf4j = { module = "org.slf4j:slf4j-nop", version.ref = "slf4j" }
@@ -263,6 +268,7 @@ multiplatform-openstf-api = { module = "eu.codlab:kotlin-openstf-api", version.r
 multiplatform-string-fuzzywuzzy = { module = "eu.codlab:fuzzywuzzy-kotlin", version.ref = "fuzzywuzzy-multiplatform" }
 managed-device-gradlePlugin = { module = "eu.codlab.gradle.plugin.managed-device:eu.codlab.gradle.plugin.managed-device.gradle.plugin", version.ref = "codlab-libraries" }
 openstf-gradlePlugin = { module = "eu.codlab.gradle.plugin.openstf-gradle:eu.codlab.gradle.plugin.openstf-gradle.gradle.plugin", version.ref = "codlab-libraries" }
+preferences-library = { module = "me.zhanghai.compose.preference:library", version.ref = "preferences-library" }
 
 # License reporting
 libraries-report = { group = "com.mikepenz", name = "aboutlibraries-core", version.ref = "libraries-report" }
