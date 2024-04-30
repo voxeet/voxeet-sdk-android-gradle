@@ -66,7 +66,7 @@ androidx-core-splashscreen = "1.0.0"
 material = "1.7.0"
 # Compose
 androidx-compose = "1.5.4"
-jetbrains-compose = "1.5.10-beta02"
+jetbrains-compose = "1.6.1"
 androidx-compose-material3 = "1.1.2"
 # @keep
 androidx-compose-compiler = "1.5.11"
